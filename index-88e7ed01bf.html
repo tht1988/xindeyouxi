@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>挖矿游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 玩家信息 -->
+        <div class="player-info">
+            <h2>玩家信息 <span style="font-size: 0.8em; color: #666; margin-left: 10px;">v.0.1.0</span></h2>
+            <div class="info-item">等级: <span id="player-level">lv1</span></div>
+            <div class="info-item">经验: <span id="player-exp">0</span>/<span id="player-next-exp">50</span></div>
+            <div class="info-item">金币: <span id="player-gold">0</span></div>
+            <div class="save-controls">
+                <button id="save-btn">保存游戏</button>
+                <button id="load-btn">加载游戏</button>
+                <button id="export-btn">导出数据</button>
+                <button id="import-btn">导入数据</button>
+                <div class="save-message" id="save-message"></div>
+            </div>
+            <!-- 存档管理 -->
+            <div class="save-system">
+                <h3>存档管理</h3>
+                <div id="save-slots-container"></div>
+            </div>
+        </div>
+
+        <!-- 工具信息 -->
+        <div class="tools-info">
+            <h2>工具信息</h2>
+            <div class="info-item">
+                采矿锄: <span id="pickaxe-level">lv0</span> (<span id="pickaxe-exp">0</span>/<span id="pickaxe-next-exp">50</span>) 
+                <button id="upgrade-pickaxe" style="margin-left: 10px; padding: 2px 8px; font-size: 0.8em;">升级工具</button>
+            </div>
+            <div class="info-item">
+                矿车: <span id="cart-status">未制作</span> 
+                <button id="toggle-cart" style="margin-left: 10px; padding: 2px 8px; font-size: 0.8em;">暂停使用</button> 
+                <button id="upgrade-cart" style="margin-left: 10px; padding: 2px 8px; font-size: 0.8em;">升级工具</button> 
+                <select id="cart-fuel-type" style="margin-left: 10px; padding: 2px 5px; font-size: 0.8em;">
+                    <option value="coal">煤矿</option>
+                    <option value="fuel">燃料</option>
+                </select> 
+                <button id="add-cart-fuel" style="margin-left: 10px; padding: 2px 8px; font-size: 0.8em;">添加燃料</button> 
+                <div style="margin-top: 5px; font-size: 0.8em;">
+                    <span id="cart-fuel-countdown">0秒</span> 
+                    <div style="width: 200px; height: 5px; background-color: #ddd; margin-top: 3px;">
+                        <div id="cart-fuel-progress" style="height: 100%; background-color: #4CAF50; width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-item">
+                头灯: <span id="headlight-status">未制作</span> 
+                <button id="toggle-headlight" style="margin-left: 10px; padding: 2px 8px; font-size: 0.8em;">暂停使用</button> 
+                <button id="upgrade-headlight" style="margin-left: 10px; padding: 2px 8px; font-size: 0.8em;">升级工具</button> 
+                <select id="headlight-fuel-type" style="margin-left: 10px; padding: 2px 5px; font-size: 0.8em;">
+                    <option value="gold">金币</option>
+                    <option value="battery">电池</option>
+                </select> 
+                <button id="install-headlight-battery" style="margin-left: 10px; padding: 2px 8px; font-size: 0.8em;">安装电池</button> 
+                <div style="margin-top: 5px; font-size: 0.8em;">
+                    <span id="headlight-fuel-countdown">0秒</span> 
+                    <div style="width: 200px; height: 5px; background-color: #ddd; margin-top: 3px;">
+                        <div id="headlight-fuel-progress" style="height: 100%; background-color: #2196F3; width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 矿物列表 -->
+        <div class="minerals">
+            <h2>矿物列表</h2>
+            <div class="mineral-grid" id="mineral-grid">
+                <!-- 矿物将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <!-- 背包系统 -->
+        <div class="backpack">
+            <h2>背包 (容量: <span id="backpack-capacity">10</span>/<span id="backpack-max">10</span>)</h2>
+            <div class="backpack-grid" id="backpack-grid">
+                <!-- 背包格子将通过JavaScript动态生成 -->
+            </div>
+            <div class="backpack-controls">
+                <button id="sell-btn">出售物品</button>
+                <button id="disassemble-btn">拆解物品</button>
+                <button id="filter-btn">自动出售</button>
+                <button id="organize-btn">整理背包</button>
+                <div class="item-totals" id="item-totals">
+                    <!-- 物品总数将通过JavaScript动态生成 -->
+                </div>
+                <div class="sell-panel" id="sell-panel">
+                    <h3>出售物品</h3>
+                    <select id="sell-item"></select>
+                    <label for="sell-amount">数量:</label>
+                    <input type="number" id="sell-amount" min="1" max="20" value="1">
+                    <button id="confirm-sell">确认出售</button>
+                </div>
+                <div class="disassemble-panel" id="disassemble-panel">
+                    <h3>拆解物品</h3>
+                    <select id="disassemble-item"></select>
+                    <label for="disassemble-amount">数量:</label>
+                    <input type="number" id="disassemble-amount" min="1" max="20" value="1">
+                    <button id="confirm-disassemble">确认拆解</button>
+                </div>
+                <div class="filter-panel" id="filter-panel">
+                    <h3>自动出售</h3>
+                    <select id="filter-item"></select>
+                    <label for="filter-min-amount">最小保留数量:</label>
+                    <input type="number" id="filter-min-amount" min="0" max="9999" value="0">
+                    <button id="confirm-filter">确认设置</button>
+                    <button id="remove-filter">移除过滤</button>
+                    <div class="filter-settings" id="filter-settings">
+                        <!-- 过滤设置将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 背包扩充栏位 -->
+            <div class="backpack-expansions">
+                <h3>背包扩充栏位 (0/10)</h3>
+                <div class="expansion-slots" id="expansion-slots">
+                    <!-- 扩充栏位将通过JavaScript动态生成 -->
+                </div>
+            </div>
+            
+            <!-- 获得信息区 -->
+            <div class="gained-info" id="gained-info">
+                <h3>获得信息</h3>
+                <div class="gained-stats">
+                    <div class="gained-stat">经验: <span id="gained-exp">0</span></div>
+                    <div class="gained-stat">矿物: <span id="gained-minerals">0</span></div>
+                    <div class="gained-stat">布料: <span id="gained-cloth">0</span></div>
+                </div>
+                <div class="detailed-gained-info" style="margin-top: 10px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                    <h4>详细获得信息</h4>
+                    <div id="detailed-gained-info-content">
+                        <!-- 详细获得信息将通过JavaScript动态生成 -->
+                        <p>暂无详细信息</p>
+                    </div>
+                </div>
+                <div class="auto-sell-info" style="margin-top: 10px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                    <h4>自动出售信息</h4>
+                    <div class="auto-sell-stats">
+                        <div class="auto-sell-stat">自动出售获得金币: <span id="auto-sell-gold">0</span></div>
+                        <div id="auto-sell-items" style="margin-top: 5px;">
+                            <!-- 自动出售物品将通过JavaScript动态生成 -->
+                            <p>暂无自动出售记录</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gained-actions" style="margin-top: 10px;">
+                    <button id="reset-gained-info" style="padding: 5px 10px; margin-right: 10px;">清空重置</button>
+                    <div class="afk-timer" style="display: inline-block; margin-left: 10px;">
+                        挂机时间: <span id="afk-timer">00:00:00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 滚动信息提示区 -->
+            <div class="scroll-messages" id="scroll-messages">
+                <h3>获得记录</h3>
+                <div class="messages-container" id="messages-container">
+                    <!-- 信息将通过JavaScript动态生成 -->
+                </div>
+            </div>
+        
+            <!-- 临时背包管理 -->
+            <div class="temp-backpack">
+                <h2>临时背包</h2>
+                <div class="temp-backpack-content" id="temp-backpack-content">
+                    <!-- 临时背包内容将通过JavaScript动态生成 -->
+                </div>
+                <button id="move-temp-items" style="margin-top: 10px; padding: 5px 10px;">将临时物品移到主背包</button>
+            </div>
+        </div>
+
+        <!-- 熔炉和制作系统容器 -->
+        <div class="furnace-container">
+            <!-- 熔炉系统 -->
+            <div class="furnace">
+                <h2>熔炉 (等级: <span id="furnace-level">0</span>)</h2>
+                <div class="furnace-controls">
+                    <div class="furnace-control-item">
+                        <button id="smelt-stone">融石</button>
+                        <div class="furnace-dropdown smelt-dropdown" id="smelt-dropdown" style="display: none;">
+                            <div class="dropdown-content">
+                                <div class="dropdown-header">选择融石配方</div>
+                                <div class="dropdown-body">
+                                    <div class="smelt-recipe" style="margin-top: 10px;">
+                                        <label for="smelt-recipe">选择配方:</label>
+                                        <select id="smelt-recipe" style="padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                                            <option value="石灰">石灰</option>
+                                            <option value="煤炭">煤炭</option>
+                                        </select>
+                                    </div>
+                                    <div class="smelt-info" id="smelt-info" style="margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 3px; border: 1px solid #ddd;">
+                                        <div class="smelt-info-header">配方属性</div>
+                                        <div class="smelt-info-body" id="smelt-info-body">
+                                            <p>请选择一个配方</p>
+                                        </div>
+                                    </div>
+                                    <div class="smelt-amount" style="margin-top: 10px;">
+                                        <label for="smelt-amount">制作数量:</label>
+                                        <input type="number" id="smelt-amount" min="1" max="10" value="1" style="padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                                    </div>
+                                    <button id="confirm-smelt">确认制作</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="furnace-control-item">
+                        <button id="make-alloy">合金</button>
+                        <div class="furnace-dropdown alloy-dropdown" id="alloy-dropdown" style="display: none;">
+                            <div class="dropdown-content">
+                                <div class="dropdown-header">选择合金</div>
+                                <div class="dropdown-body">
+                                    <select id="alloy-type"></select>
+                                    <div class="alloy-info" id="alloy-info" style="margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 3px; border: 1px solid #ddd;">
+                                        <div class="alloy-info-header">合金属性</div>
+                                        <div class="alloy-info-body" id="alloy-info-body">
+                                            <p>请选择一个合金</p>
+                                        </div>
+                                    </div>
+                                    <div class="alloy-amount" style="margin-top: 10px;">
+                                        <label for="alloy-amount">制作数量:</label>
+                                        <input type="number" id="alloy-amount" min="1" max="10" value="1" style="padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                                    </div>
+                                    <button id="confirm-alloy" style="margin-top: 10px;">制作合金</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 制作系统 -->
+            <div class="crafting">
+                <h2>制作系统</h2>
+                <div class="crafting-items">
+                    <button id="craft-cart">制作矿车 (铁矿20, 50金币)</button>
+                    <button id="craft-headlight">制作头灯 (铁矿100, 铜矿10, 1000金币)</button>
+                    <div class="crafting-control-item">
+                        <button id="craft-backpack">制作扩充背包</button>
+                        <div class="crafting-dropdown backpack-dropdown" id="backpack-dropdown" style="display: none;">
+                            <div class="dropdown-content">
+                                <div class="dropdown-header">选择扩充背包</div>
+                                <div class="dropdown-body">
+                                    <select id="backpack-type"></select>
+                                    <div class="backpack-info" id="backpack-info" style="margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 3px; border: 1px solid #ddd;">
+                                        <div class="backpack-info-header">背包属性</div>
+                                        <div class="backpack-info-body" id="backpack-info-body">
+                                            <p>请选择一个扩充背包</p>
+                                        </div>
+                                    </div>
+                                    <button id="confirm-craft-backpack" style="margin-top: 10px;">制作</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="craft-furnace">制作熔炉 (石矿20)</button>
+                </div>
+            </div>
+
+            <!-- 加工台系统 -->
+            <div class="workshop" id="workshop" style="display: block;">
+                <h2>加工台 <span id="workshop-status">(未解锁)</span></h2>
+                <div class="workshop-controls">
+                    <button id="unlock-workshop">解锁加工台 (需要等级15和加工台图纸)</button>
+                </div>
+                <div class="workshop-items" id="workshop-items">
+                    <!-- 加工台物品将通过JavaScript动态生成 -->
+                    <p>加工台未解锁，需要等级15和加工台图纸</p>
+                </div>
+            </div>
+
+            <!-- 商店系统 -->
+            <div class="shop" id="shop" style="display: none;">
+                <h2>商店 (等级: <span id="shop-level">1</span>)</h2>
+                <div class="shop-info">
+                    <div class="refresh-info">
+                        <span>自动刷新: <span id="shop-countdown">3:00</span></span>
+                        <div class="refresh-progress">
+                            <div class="refresh-progress-bar" id="shop-progress"></div>
+                        </div>
+                        <button id="refresh-shop">刷新 (1000金币)</button>
+                    </div>
+                </div>
+                <div class="shop-items" id="shop-items">
+                    <!-- 商店物品将通过JavaScript动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模块化脚本引入 -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>
