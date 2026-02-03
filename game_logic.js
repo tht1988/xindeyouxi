@@ -1,5 +1,7 @@
 // 游戏逻辑文件
 
+
+
 // 战斗动画系统
 class CombatAnimationSystem {
     constructor() {
@@ -345,74 +347,7 @@ window.gameLoadFailed = function(errorMessage) {
 addToLog('游戏初始化中...');
 addToLog('正在加载游戏数据，请稍候...');
 
-// DOM元素缓存
-const DOM = {
-    // 状态元素
-    statusText: document.getElementById('status-text'),
-    loadingIndicator: document.getElementById('loading-indicator'),
-    logContent: document.getElementById('log-content'),
-    
-    // 玩家信息元素
-    playerLevel: document.getElementById('player-level'),
-    playerHealth: document.getElementById('player-health'),
-    playerMana: document.getElementById('player-mana'),
-    
-    // 按钮元素
-    saveGameBtn: document.getElementById('save-game-btn'),
-    loadGameBtn: document.getElementById('load-game-btn'),
-    generateEnemyBtn: document.getElementById('generate-enemy-btn'),
-    startEncounterBtn: document.getElementById('start-encounter-btn'),
-    attackBtn: document.getElementById('attack-btn'),
-    skillBtn: document.getElementById('skill-btn'),
-    fleeBtn: document.getElementById('flee-btn'),
-    
-    // 工艺系统按钮
-    openImprintBtn: document.getElementById('open-imprint-btn'),
-    openEnchantBtn: document.getElementById('open-enchant-btn'),
-    openDisassembleBtn: document.getElementById('open-disassemble-btn'),
-    openEnhanceBtn: document.getElementById('open-enhance-btn'),
-    openInscriptionBtn: document.getElementById('open-inscription-btn'),
-    
-    // 面板按钮
-    enchantButton: document.getElementById('enchant-button'),
-    enhanceButton: document.getElementById('enhance-button'),
-    combineButton: document.getElementById('combine-button'),
-    
-    // 面板元素
-    classSelection: document.getElementById('class-selection'),
-    enemyEncounter: document.getElementById('enemy-encounter'),
-    enemyGroup: document.getElementById('enemy-group'),
-    combatArena: document.getElementById('combat-arena'),
-    enemyCombatant: document.getElementById('enemy-combatant'),
-    enemyName: document.getElementById('enemy-name'),
-    enemyCombatantName: document.getElementById('enemy-combatant-name'),
-    enemyHealthBar: document.getElementById('enemy-health-bar'),
-    enemyHealthFill: document.getElementById('enemy-health-fill'),
-    enemyHealthText: document.getElementById('enemy-health-text'),
-    lootList: document.getElementById('loot-list'),
-    
-    // 装备槽位
-    equipmentSlots: {
-        weapon: document.getElementById('slot-weapon'),
-        head: document.getElementById('slot-head'),
-        chest: document.getElementById('slot-chest'),
-        hands: document.getElementById('slot-hands'),
-        legs: document.getElementById('slot-legs'),
-        feet: document.getElementById('slot-feet'),
-        ring: document.getElementById('slot-ring'),
-        neck: document.getElementById('slot-neck')
-    },
-    
-    // 属性元素
-    attributes: {
-        strength: document.getElementById('attr-strength'),
-        agility: document.getElementById('attr-agility'),
-        precision: document.getElementById('attr-precision'),
-        vitality: document.getElementById('attr-vitality'),
-        endurance: document.getElementById('attr-endurance')
-    },
-    availablePoints: document.getElementById('available-points')
-};
+
 
 // 初始化事件监听器
 function initEventListeners() {
@@ -1528,7 +1463,7 @@ function getEnhanceCost(rarity, level) {
         uncommon: '优秀精华 x' + (level + 1) + ', 普通尘埃 x' + (level + 1),
         rare: '稀有水晶 x' + (level + 1) + ', 优秀精华 x' + (level + 1),
         epic: '史诗碎片 x' + (level + 1) + ', 稀有水晶 x' + (level + 1),
-        ancient: '远古核心 x' + (level + 1) + ', 史诗碎片 x' + (level + 1),
+        ancient: '远古核心 x' + (level + 1) + ', 史诗碎片 x' + (level + 1)
     };
     return baseCosts[rarity] || '普通尘埃 x' + (level + 1);
 }
