@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>挖矿游戏</title>
+    <title>挖矿游戏 - 修复版本</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    <div class="game-container">
+    <div class="loading" id="loading">正在加载游戏...</div>
+    
+    <div class="game-container" id="game-container" style="display: none;">
         <!-- 玩家信息 -->
         <div class="player-info">
             <h2>玩家信息 <span style="font-size: 0.8em; color: #666; margin-left: 10px;">v.0.1.0</span></h2>
@@ -21,7 +37,6 @@
                 <button id="import-btn">导入数据</button>
                 <div class="save-message" id="save-message"></div>
             </div>
-            <!-- 存档管理 -->
             <div class="save-system">
                 <h3>存档管理</h3>
                 <div id="save-slots-container"></div>
@@ -72,25 +87,19 @@
         <!-- 矿物列表 -->
         <div class="minerals">
             <h2>矿物列表</h2>
-            <div class="mineral-grid" id="mineral-grid">
-                <!-- 矿物将通过JavaScript动态生成 -->
-            </div>
+            <div class="mineral-grid" id="mineral-grid"></div>
         </div>
 
         <!-- 背包系统 -->
         <div class="backpack">
             <h2>背包 (容量: <span id="backpack-capacity">10</span>/<span id="backpack-max">10</span>)</h2>
-            <div class="backpack-grid" id="backpack-grid">
-                <!-- 背包格子将通过JavaScript动态生成 -->
-            </div>
+            <div class="backpack-grid" id="backpack-grid"></div>
             <div class="backpack-controls">
                 <button id="sell-btn">出售物品</button>
                 <button id="disassemble-btn">拆解物品</button>
                 <button id="filter-btn">自动出售</button>
                 <button id="organize-btn">整理背包</button>
-                <div class="item-totals" id="item-totals">
-                    <!-- 物品总数将通过JavaScript动态生成 -->
-                </div>
+                <div class="item-totals" id="item-totals"></div>
                 <div class="sell-panel" id="sell-panel">
                     <h3>出售物品</h3>
                     <select id="sell-item"></select>
@@ -112,21 +121,15 @@
                     <input type="number" id="filter-min-amount" min="0" max="9999" value="0">
                     <button id="confirm-filter">确认设置</button>
                     <button id="remove-filter">移除过滤</button>
-                    <div class="filter-settings" id="filter-settings">
-                        <!-- 过滤设置将通过JavaScript动态生成 -->
-                    </div>
+                    <div class="filter-settings" id="filter-settings"></div>
                 </div>
             </div>
             
-            <!-- 背包扩充栏位 -->
             <div class="backpack-expansions">
                 <h3>背包扩充栏位 (0/10)</h3>
-                <div class="expansion-slots" id="expansion-slots">
-                    <!-- 扩充栏位将通过JavaScript动态生成 -->
-                </div>
+                <div class="expansion-slots" id="expansion-slots"></div>
             </div>
             
-            <!-- 获得信息区 -->
             <div class="gained-info" id="gained-info">
                 <h3>获得信息</h3>
                 <div class="gained-stats">
@@ -136,19 +139,13 @@
                 </div>
                 <div class="detailed-gained-info" style="margin-top: 10px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
                     <h4>详细获得信息</h4>
-                    <div id="detailed-gained-info-content">
-                        <!-- 详细获得信息将通过JavaScript动态生成 -->
-                        <p>暂无详细信息</p>
-                    </div>
+                    <div id="detailed-gained-info-content"><p>暂无详细信息</p></div>
                 </div>
                 <div class="auto-sell-info" style="margin-top: 10px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
                     <h4>自动出售信息</h4>
                     <div class="auto-sell-stats">
                         <div class="auto-sell-stat">自动出售获得金币: <span id="auto-sell-gold">0</span></div>
-                        <div id="auto-sell-items" style="margin-top: 5px;">
-                            <!-- 自动出售物品将通过JavaScript动态生成 -->
-                            <p>暂无自动出售记录</p>
-                        </div>
+                        <div id="auto-sell-items" style="margin-top: 5px;"><p>暂无自动出售记录</p></div>
                     </div>
                 </div>
                 <div class="gained-actions" style="margin-top: 10px;">
@@ -159,20 +156,14 @@
                 </div>
             </div>
             
-            <!-- 滚动信息提示区 -->
             <div class="scroll-messages" id="scroll-messages">
                 <h3>获得记录</h3>
-                <div class="messages-container" id="messages-container">
-                    <!-- 信息将通过JavaScript动态生成 -->
-                </div>
+                <div class="messages-container" id="messages-container"></div>
             </div>
         
-            <!-- 临时背包管理 -->
             <div class="temp-backpack">
                 <h2>临时背包</h2>
-                <div class="temp-backpack-content" id="temp-backpack-content">
-                    <!-- 临时背包内容将通过JavaScript动态生成 -->
-                </div>
+                <div class="temp-backpack-content" id="temp-backpack-content"></div>
                 <button id="move-temp-items" style="margin-top: 10px; padding: 5px 10px;">将临时物品移到主背包</button>
             </div>
         </div>
@@ -198,9 +189,7 @@
                                     </div>
                                     <div class="smelt-info" id="smelt-info" style="margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 3px; border: 1px solid #ddd;">
                                         <div class="smelt-info-header">配方属性</div>
-                                        <div class="smelt-info-body" id="smelt-info-body">
-                                            <p>请选择一个配方</p>
-                                        </div>
+                                        <div class="smelt-info-body" id="smelt-info-body"><p>请选择一个配方</p></div>
                                     </div>
                                     <div class="smelt-amount" style="margin-top: 10px;">
                                         <label for="smelt-amount">制作数量:</label>
@@ -220,9 +209,7 @@
                                     <select id="alloy-type"></select>
                                     <div class="alloy-info" id="alloy-info" style="margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 3px; border: 1px solid #ddd;">
                                         <div class="alloy-info-header">合金属性</div>
-                                        <div class="alloy-info-body" id="alloy-info-body">
-                                            <p>请选择一个合金</p>
-                                        </div>
+                                        <div class="alloy-info-body" id="alloy-info-body"><p>请选择一个合金</p></div>
                                     </div>
                                     <div class="alloy-amount" style="margin-top: 10px;">
                                         <label for="alloy-amount">制作数量:</label>
@@ -251,9 +238,7 @@
                                     <select id="backpack-type"></select>
                                     <div class="backpack-info" id="backpack-info" style="margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 3px; border: 1px solid #ddd;">
                                         <div class="backpack-info-header">背包属性</div>
-                                        <div class="backpack-info-body" id="backpack-info-body">
-                                            <p>请选择一个扩充背包</p>
-                                        </div>
+                                        <div class="backpack-info-body" id="backpack-info-body"><p>请选择一个扩充背包</p></div>
                                     </div>
                                     <button id="confirm-craft-backpack" style="margin-top: 10px;">制作</button>
                                 </div>
@@ -270,10 +255,7 @@
                 <div class="workshop-controls">
                     <button id="unlock-workshop">解锁加工台 (需要等级15和加工台图纸)</button>
                 </div>
-                <div class="workshop-items" id="workshop-items">
-                    <!-- 加工台物品将通过JavaScript动态生成 -->
-                    <p>加工台未解锁，需要等级15和加工台图纸</p>
-                </div>
+                <div class="workshop-items" id="workshop-items"><p>加工台未解锁，需要等级15和加工台图纸</p></div>
             </div>
 
             <!-- 商店系统 -->
@@ -288,14 +270,77 @@
                         <button id="refresh-shop">刷新 (1000金币)</button>
                     </div>
                 </div>
-                <div class="shop-items" id="shop-items">
-                    <!-- 商店物品将通过JavaScript动态生成 -->
-                </div>
+                <div class="shop-items" id="shop-items"></div>
             </div>
         </div>
     </div>
 
-    <!-- 模块化脚本引入 -->
-    <script type="module" src="main.js"></script>
+    <script>
+        // 错误处理
+        window.onerror = function(msg, url, line, col, error) {
+            console.error('JavaScript Error:', msg);
+            const loadingDiv = document.getElementById('loading');
+            if (loadingDiv) {
+                loadingDiv.innerHTML = '<div style="color: red; padding: 20px;">游戏加载失败，请检查控制台错误信息<br><br>错误: ' + msg + '</div>';
+            }
+            return false;
+        };
+
+        // 检查文件加载
+        function checkFileExists(filename) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', filename, false);
+            try {
+                xhr.send();
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log('✓ 文件加载成功:', filename);
+                    return true;
+                }
+            } catch(e) {
+                console.error('✗ 文件加载失败:', filename);
+                return false;
+            }
+            return false;
+        }
+
+        // 加载游戏文件
+        var filesToCheck = ['style.css', 'game.js'];
+        var allFilesExist = true;
+
+        filesToCheck.forEach(function(filename) {
+            if (!checkFileExists(filename)) {
+                allFilesExist = false;
+                var loadingDiv = document.getElementById('loading');
+                if (loadingDiv) {
+                    loadingDiv.innerHTML = '<div style="color: red; padding: 20px;">文件加载失败: ' + filename + '<br>请确保所有文件都在同一个文件夹中</div>';
+                }
+            }
+        });
+
+        if (allFilesExist) {
+            // 加载 game.js
+            var script = document.createElement('script');
+            script.src = 'game.js';
+            script.onload = function() {
+                console.log('✓ game.js 加载成功');
+                var loadingDiv = document.getElementById('loading');
+                if (loadingDiv) {
+                    loadingDiv.style.display = 'none';
+                }
+                var gameContainer = document.getElementById('game-container');
+                if (gameContainer) {
+                    gameContainer.style.display = 'block';
+                }
+            };
+            script.onerror = function() {
+                console.error('✗ game.js 加载失败');
+                var loadingDiv = document.getElementById('loading');
+                if (loadingDiv) {
+                    loadingDiv.innerHTML = '<div style="color: red; padding: 20px;">game.js 加载失败<br>请确保 game.js 文件存在</div>';
+                }
+            };
+            document.head.appendChild(script);
+        }
+    </script>
 </body>
 </html>
