@@ -1,6 +1,55 @@
 // 游戏逻辑文件
 
-
+// DOM元素引用对象
+const DOM = {
+    statusText: document.getElementById('status-text'),
+    loadingIndicator: document.getElementById('loading-indicator'),
+    logContent: document.getElementById('log-content'),
+    saveGameBtn: document.getElementById('save-game-btn'),
+    loadGameBtn: document.getElementById('load-game-btn'),
+    generateEnemyBtn: document.getElementById('generate-enemy-btn'),
+    startEncounterBtn: document.getElementById('start-encounter-btn'),
+    attackBtn: document.getElementById('attack-btn'),
+    skillBtn: document.getElementById('skill-btn'),
+    fleeBtn: document.getElementById('flee-btn'),
+    openImprintBtn: document.getElementById('open-imprint-btn'),
+    openEnchantBtn: document.getElementById('open-enchant-btn'),
+    openDisassembleBtn: document.getElementById('open-disassemble-btn'),
+    openEnhanceBtn: document.getElementById('open-enhance-btn'),
+    openInscriptionBtn: document.getElementById('open-inscription-btn'),
+    enchantButton: document.getElementById('enchant-button'),
+    enhanceButton: document.getElementById('enhance-button'),
+    combineButton: document.getElementById('combine-button'),
+    combatArena: document.getElementById('combat-arena'),
+    enemyName: document.getElementById('enemy-name'),
+    enemyCombatantName: document.querySelector('.enemy-combatant-name'),
+    enemyHealthFill: document.getElementById('enemy-health-fill'),
+    enemyHealthText: document.getElementById('enemy-health-text'),
+    playerHealth: document.getElementById('player-health'),
+    playerMana: document.getElementById('player-mana'),
+    lootList: document.getElementById('loot-list'),
+    classSelection: document.getElementById('class-selection'),
+    enemyGroup: document.getElementById('enemy-group'),
+    enemyEncounter: document.getElementById('enemy-encounter'),
+    attributes: {
+        strength: document.getElementById('attr-strength'),
+        agility: document.getElementById('attr-agility'),
+        precision: document.getElementById('attr-precision'),
+        vitality: document.getElementById('attr-vitality'),
+        endurance: document.getElementById('attr-endurance')
+    },
+    availablePoints: document.getElementById('available-points'),
+    equipmentSlots: {
+        weapon: document.getElementById('slot-weapon'),
+        head: document.getElementById('slot-head'),
+        chest: document.getElementById('slot-chest'),
+        hands: document.getElementById('slot-hands'),
+        legs: document.getElementById('slot-legs'),
+        feet: document.getElementById('slot-feet'),
+        ring: document.getElementById('slot-ring'),
+        neck: document.getElementById('slot-neck')
+    }
+};
 
 // 战斗动画系统
 class CombatAnimationSystem {
