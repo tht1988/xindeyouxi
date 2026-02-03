@@ -1,0 +1,44 @@
+{
+  "armors": [
+    {
+      "id": "helmet",
+      "name": "头盔",
+      "type": "head",
+      "base_armor": 5,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "chest",
+      "name": "胸甲",
+      "type": "chest",
+      "base_armor": 10,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "gloves",
+      "name": "手套",
+      "type": "hands",
+      "base_armor": 3,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "pants",
+      "name": "裤子",
+      "type": "legs",
+      "base_armor": 7,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "boots",
+      "name": "靴子",
+      "type": "feet",
+      "base_armor": 4,
+      "rarity": "common",
+      "level_requirement": 1
+    }
+  ]
+}

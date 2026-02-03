@@ -1,0 +1,49 @@
+{
+  "game": {
+    "name": "RPG刷宝游戏",
+    "version": "1.0.0",
+    "developer": "Game Developer",
+    "description": "一款基于浏览器的RPG刷宝游戏"
+  },
+  "gameplay": {
+    "starting_gold": 100,
+    "starting_level": 1,
+    "max_level": 100,
+    "difficulty": "normal"
+  },
+  "graphics": {
+    "resolution": {
+      "width": 800,
+      "height": 600
+    },
+    "fps": 60,
+    "quality": "high"
+  },
+  "audio": {
+    "enabled": true,
+    "volume": {
+      "master": 70,
+      "music": 60,
+      "sfx": 80
+    }
+  },
+  "controls": {
+    "keyboard": {
+      "move_up": "W",
+      "move_down": "S",
+      "move_left": "A",
+      "move_right": "D",
+      "attack": "Space",
+      "inventory": "I",
+      "skills": "K"
+    },
+    "mouse": {
+      "enabled": true
+    }
+  },
+  "debug": {
+    "enabled": false,
+    "show_fps": true,
+    "show_hitboxes": false
+  }
+}

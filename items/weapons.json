@@ -1,0 +1,60 @@
+{
+  "weapons": [
+    {
+      "id": "sword",
+      "name": "剑",
+      "type": "melee",
+      "damage_type": "physical",
+      "base_damage": {
+        "min": 10,
+        "max": 15
+      },
+      "attack_speed": 1.0,
+      "hands": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "axe",
+      "name": "斧",
+      "type": "melee",
+      "damage_type": "physical",
+      "base_damage": {
+        "min": 12,
+        "max": 18
+      },
+      "attack_speed": 0.8,
+      "hands": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "bow",
+      "name": "弓",
+      "type": "ranged",
+      "damage_type": "physical",
+      "base_damage": {
+        "min": 8,
+        "max": 12
+      },
+      "attack_speed": 1.2,
+      "hands": 2,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "staff",
+      "name": "法杖",
+      "type": "magic",
+      "damage_type": "arcane",
+      "base_damage": {
+        "min": 6,
+        "max": 10
+      },
+      "attack_speed": 0.9,
+      "hands": 2,
+      "rarity": "common",
+      "level_requirement": 1
+    }
+  ]
+}
