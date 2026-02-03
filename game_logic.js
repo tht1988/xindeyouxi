@@ -7,6 +7,8 @@ const DOM = {
     logContent: document.getElementById('log-content'),
     saveGameBtn: document.getElementById('save-game-btn'),
     loadGameBtn: document.getElementById('load-game-btn'),
+    exportSaveBtn: document.getElementById('export-save-btn'),
+    importSaveBtn: document.getElementById('import-save-btn'),
     generateEnemyBtn: document.getElementById('generate-enemy-btn'),
     startEncounterBtn: document.getElementById('start-encounter-btn'),
     attackBtn: document.getElementById('attack-btn'),
@@ -403,6 +405,8 @@ function initEventListeners() {
     // 保存/加载游戏
     if (DOM && DOM.saveGameBtn) DOM.saveGameBtn.addEventListener('click', saveGame);
     if (DOM && DOM.loadGameBtn) DOM.loadGameBtn.addEventListener('click', loadGame);
+    if (DOM && DOM.exportSaveBtn) DOM.exportSaveBtn.addEventListener('click', exportSave);
+    if (DOM && DOM.importSaveBtn) DOM.importSaveBtn.addEventListener('change', importSave);
     
     // 生成敌人
     if (DOM && DOM.generateEnemyBtn) DOM.generateEnemyBtn.addEventListener('click', generateEnemyEncounter);
@@ -610,6 +614,16 @@ async function battleWithEnemy(enemy) {
         // 战斗间隔
         await new Promise(resolve => setTimeout(resolve, 800));
     }
+    
+    // 战斗结束后，恢复生命值和法力值
+    player.health = player.maxHealth;
+    player.mana = player.maxMana;
+    
+    // 更新显示
+    updatePlayerHealth();
+    updatePlayerMana();
+    
+    addToLog('战斗结束，你的生命值和法力值已完全恢复！');
 }
 
 // 计算伤害
@@ -924,8 +938,8 @@ function generateEnemyEncounter() {
     // 根据玩家属性计算匹配等级
     const playerLevel = calculatePlayerEffectiveLevel();
     
-    // 生成3-4个不同属性的敌人
-    const enemyCount = Math.floor(Math.random() * 2) + 3; // 3-4个敌人
+    // 生成2-3个不同属性的敌人
+    const enemyCount = Math.floor(Math.random() * 2) + 2; // 2-3个敌人
     currentEnemyGroup = [];
     
     for (let i = 0; i < enemyCount; i++) {
@@ -947,19 +961,26 @@ function calculatePlayerEffectiveLevel() {
 
 // 生成匹配玩家等级的敌人
 function generateMatchingEnemy(playerLevel) {
-    // 过滤适合玩家等级的敌人
+    // 过滤适合玩家等级的敌人（降低难度，敌人等级低于或等于玩家等级）
     const suitableEnemies = game.enemies.filter(enemy => 
-        Math.abs(enemy.level - playerLevel) <= 2
+        enemy.level <= playerLevel
     );
     
     if (suitableEnemies.length === 0) {
-        return game.enemies[Math.floor(Math.random() * game.enemies.length)];
+        // 如果没有适合的敌人，选择等级较低的敌人
+        const lowLevelEnemies = game.enemies.filter(enemy => 
+            enemy.level <= playerLevel + 1
+        );
+        if (lowLevelEnemies.length === 0) {
+            return game.enemies[Math.floor(Math.random() * game.enemies.length)];
+        }
+        return JSON.parse(JSON.stringify(lowLevelEnemies[Math.floor(Math.random() * lowLevelEnemies.length)]));
     }
     
     // 随机选择一个敌人
     let enemy = JSON.parse(JSON.stringify(suitableEnemies[Math.floor(Math.random() * suitableEnemies.length)]));
     
-    // 根据玩家属性调整敌人属性（5%-10%的差异）
+    // 根据玩家属性调整敌人属性（降低难度，敌人属性较弱）
     adjustEnemyAttributes(enemy);
     
     return enemy;
@@ -967,10 +988,9 @@ function generateMatchingEnemy(playerLevel) {
 
 // 调整敌人属性以匹配玩家
 function adjustEnemyAttributes(enemy) {
-    // 计算属性调整比例（5%-10%）
-    const adjustment = 0.05 + Math.random() * 0.05;
-    const isBuff = Math.random() > 0.5;
-    const multiplier = isBuff ? (1 + adjustment) : (1 - adjustment);
+    // 计算属性调整比例（降低难度，敌人属性最多比基础低15%）
+    const adjustment = 0.05 + Math.random() * 0.1;
+    const multiplier = 1 - adjustment; // 只降低敌人属性
     
     // 调整敌人属性
     Object.keys(enemy.attributes).forEach(attr => {
@@ -993,6 +1013,7 @@ function displayEnemyGroup() {
     currentEnemyGroup.forEach((enemy, index) => {
         const enemyInfo = document.createElement('div');
         enemyInfo.className = 'enemy-info';
+        enemyInfo.style.marginBottom = '20px';
         
         const attributes = Object.entries(enemy.attributes)
             .map(([attr, value]) => `${getAttributeName(attr)}: ${value}`)
@@ -1007,6 +1028,9 @@ function displayEnemyGroup() {
                 防御: ${enemy.defense}<br>
                 ${attributes}
             </div>
+            <button onclick="selectEnemyFromGroup(${index})" style="margin-top: 10px; padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                选择这个敌人
+            </button>
         `;
         
         DOM.enemyGroup.appendChild(enemyInfo);
@@ -1014,6 +1038,52 @@ function displayEnemyGroup() {
     
     if (DOM && DOM.enemyEncounter) {
         DOM.enemyEncounter.style.display = 'block';
+    }
+}
+
+// 从敌人组中选择一个敌人进行战斗
+async function selectEnemyFromGroup(index) {
+    if (!gameReady || !player.class) {
+        addToLog('请先选择职业再选择敌人！');
+        return;
+    }
+    
+    if (currentEnemyGroup.length === 0 || !currentEnemyGroup[index]) {
+        addToLog('错误：无效的敌人选择！');
+        return;
+    }
+    
+    // 获取选中的敌人
+    const selectedEnemy = currentEnemyGroup[index];
+    addToLog(`你选择了与 ${selectedEnemy.name} (等级 ${selectedEnemy.level}) 战斗！`);
+    addToLog('战斗开始...');
+    
+    // 显示战斗竞技场
+    if (DOM && DOM.combatArena) {
+        DOM.combatArena.style.display = 'block';
+    }
+    
+    // 更新敌人名称
+    if (DOM && DOM.enemyName) {
+        DOM.enemyName.textContent = selectedEnemy.name;
+    }
+    if (DOM && DOM.enemyCombatantName) {
+        DOM.enemyCombatantName.textContent = selectedEnemy.name;
+    }
+    
+    // 初始化敌人生命值
+    updateEnemyHealthBar(100);
+    
+    // 播放入场动画
+    await combatAnimationSystem.queueAnimation('entrance');
+    
+    // 与选中的敌人战斗
+    await battleWithEnemy(selectedEnemy);
+    
+    // 战斗结束后，不继续与其他敌人战斗
+    // 隐藏敌人遭遇界面
+    if (DOM && DOM.enemyEncounter) {
+        DOM.enemyEncounter.style.display = 'none';
     }
 }
 
@@ -1873,6 +1943,108 @@ function loadGame() {
     } catch (error) {
         addToLog('错误：读取游戏失败');
         console.error('读取错误:', error);
+    }
+}
+
+// 导出存档为文件
+function exportSave() {
+    try {
+        // 从localStorage获取存档数据
+        const encryptedData = localStorage.getItem('gameSave');
+        const saveFileName = localStorage.getItem('saveFileName');
+        
+        if (!encryptedData) {
+            addToLog('错误：没有找到存档数据！');
+            return;
+        }
+        
+        // 创建存档对象
+        const saveData = {
+            data: encryptedData,
+            fileName: saveFileName,
+            timestamp: new Date().toISOString(),
+            version: '1.0.0'
+        };
+        
+        // 转换为JSON字符串
+        const jsonData = JSON.stringify(saveData);
+        
+        // 创建Blob对象
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        
+        // 创建下载链接
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = saveFileName || `rpg_save_${Date.now()}.sav`;
+        document.body.appendChild(a);
+        
+        // 触发下载
+        a.click();
+        
+        // 清理
+        setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 100);
+        
+        addToLog(`存档已导出为文件: ${a.download}`);
+    } catch (error) {
+        addToLog('错误：导出存档失败');
+        console.error('导出错误:', error);
+    }
+}
+
+// 导入存档文件
+function importSave(event) {
+    try {
+        const file = event.target.files[0];
+        if (!file) {
+            return;
+        }
+        
+        // 检查文件类型
+        if (!file.name.endsWith('.sav')) {
+            addToLog('错误：请选择 .sav 格式的存档文件！');
+            return;
+        }
+        
+        // 读取文件内容
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                // 解析文件内容
+                const jsonData = e.target.result;
+                const saveData = JSON.parse(jsonData);
+                
+                // 验证数据格式
+                if (!saveData.data || !saveData.fileName) {
+                    addToLog('错误：无效的存档文件格式！');
+                    return;
+                }
+                
+                // 保存到localStorage
+                localStorage.setItem('gameSave', saveData.data);
+                localStorage.setItem('saveFileName', saveData.fileName);
+                
+                // 加载游戏状态
+                loadGame();
+                
+                addToLog(`存档已从文件导入: ${saveData.fileName}`);
+            } catch (error) {
+                addToLog('错误：解析存档文件失败');
+                console.error('解析错误:', error);
+            }
+        };
+        
+        reader.onerror = function() {
+            addToLog('错误：读取存档文件失败');
+        };
+        
+        reader.readAsText(file);
+    } catch (error) {
+        addToLog('错误：导入存档失败');
+        console.error('导入错误:', error);
     }
 }
 
