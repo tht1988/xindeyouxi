@@ -23,50 +23,69 @@ class RPGGame {
 
   async loadGameData() {
     try {
-      // 加载物品数据
-      const weaponsData = await this.loadJSON('items/weapons.json');
+      console.log('开始加载游戏数据...');
+      
+      // 并行加载所有数据文件
+      const [
+        weaponsData,
+        armorsData,
+        accessoriesData,
+        prefixesData,
+        suffixesData,
+        uniquesData,
+        classesData,
+        attributesData,
+        enemiesData,
+        lootSystemData,
+        coreMechanicsData,
+        configData
+      ] = await Promise.all([
+        this.loadJSON('items/weapons.json'),
+        this.loadJSON('items/armors.json'),
+        this.loadJSON('items/accessories.json'),
+        this.loadJSON('affixes/prefixes.json'),
+        this.loadJSON('affixes/suffixes.json'),
+        this.loadJSON('affixes/uniques.json'),
+        this.loadJSON('characters/classes.json'),
+        this.loadJSON('characters/attributes.json'),
+        this.loadJSON('enemies/enemies.json'),
+        this.loadJSON('loot/loot_system.json'),
+        this.loadJSON('mechanics/core_mechanics.json'),
+        this.loadJSON('config.json')
+      ]);
+
+      // 处理加载的数据
       this.items.weapons = weaponsData.weapons;
-      
-      const armorsData = await this.loadJSON('items/armors.json');
       this.items.armors = armorsData.armors;
-      
-      const accessoriesData = await this.loadJSON('items/accessories.json');
       this.items.accessories = accessoriesData.accessories;
-
-      // 加载词缀数据
-      const prefixesData = await this.loadJSON('affixes/prefixes.json');
+      
       this.affixes.prefixes = prefixesData.prefixes;
-      
-      const suffixesData = await this.loadJSON('affixes/suffixes.json');
       this.affixes.suffixes = suffixesData.suffixes;
-      
-      const uniquesData = await this.loadJSON('affixes/uniques.json');
       this.affixes.uniques = uniquesData.uniques;
-
-      // 加载角色数据
-      const classesData = await this.loadJSON('characters/classes.json');
-      this.characters.classes = classesData.classes;
       
-      const attributesData = await this.loadJSON('characters/attributes.json');
+      this.characters.classes = classesData.classes;
       this.characters.attributes = attributesData.attributes;
-
-      // 加载敌人数据
-      const enemiesData = await this.loadJSON('enemies/enemies.json');
+      
       this.enemies = enemiesData.enemies;
-
-      // 加载掉落系统
-      this.lootSystem = await this.loadJSON('loot/loot_system.json');
-
-      // 加载核心机制
-      this.coreMechanics = await this.loadJSON('mechanics/core_mechanics.json');
-
-      // 加载配置
-      this.config = await this.loadJSON('config.json');
+      this.lootSystem = lootSystemData;
+      this.coreMechanics = coreMechanicsData;
+      this.config = configData;
 
       console.log('游戏数据加载完成！');
-      console.log('敌人数据:', this.enemies);
+      console.log('加载的文件数量:', 12);
+      console.log('敌人数据数量:', this.enemies.length);
+      
+      // 通知HTML页面加载完成
+      if (typeof window !== 'undefined' && window.gameLoaded) {
+        window.gameLoaded();
+      }
     } catch (error) {
       console.error('游戏数据加载失败:', error);
+      
+      // 通知HTML页面加载失败
+      if (typeof window !== 'undefined' && window.gameLoadFailed) {
+        window.gameLoadFailed(error.message);
+      }
     }
   }
 
