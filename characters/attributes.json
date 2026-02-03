@@ -1,0 +1,41 @@
+{
+  "attributes": {
+    "strength": {
+      "name": "力量",
+      "description": "增加物理伤害和负重能力",
+      "effects": {
+        "physical_damage": 1.0,
+        "carry_capacity": 5.0
+      }
+    },
+    "agility": {
+      "name": "敏捷",
+      "description": "增加攻击速度和暴击率",
+      "effects": {
+        "attack_speed": 0.01,
+        "critical_chance": 0.1
+      }
+    },
+    "intelligence": {
+      "name": "智力",
+      "description": "增加魔法伤害和法力值",
+      "effects": {
+        "magic_damage": 1.0,
+        "mana": 10.0
+      }
+    },
+    "vitality": {
+      "name": "活力",
+      "description": "增加生命值和生命恢复",
+      "effects": {
+        "health": 20.0,
+        "health_regen": 0.1
+      }
+    }
+  },
+  "level_up": {
+    "attribute_points_per_level": 3,
+    "health_gain_per_level": 10,
+    "mana_gain_per_level": 5
+  }
+}

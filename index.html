@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG刷宝游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>RPG刷宝游戏</h1>
+    <div id="game-container">
+        <div id="game-header">
+            <h2>史诗装备等你来刷！</h2>
+        </div>
+        
+        <div id="class-selection">
+            <h3>选择你的职业</h3>
+            <div id="class-buttons">
+                <!-- 职业按钮将通过JS动态生成 -->
+            </div>
+        </div>
+        
+        <div id="game-status">
+            <div>
+                <span>游戏状态: </span>
+                <span id="status-text">加载中...</span>
+                <span class="loading" id="loading-indicator"></span>
+            </div>
+            <div id="player-info">
+                <span>冒险者等级: <strong id="player-level">1</strong></span> | 
+                <span>生命值: <strong id="player-health">100/100</strong></span> | 
+                <span>魔法值: <strong id="player-mana">50/50</strong></span>
+                <div class="save-load-buttons">
+                    <button id="save-game-btn">保存游戏</button>
+                    <button id="load-game-btn">读取游戏</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="attributes-panel">
+            <h3>五维属性</h3>
+            <div id="attributes-grid">
+                <div class="attribute">
+                    <div>力 (力量)</div>
+                    <div>
+                        <span id="attr-strength">10</span>
+                        <button class="attribute-btn" data-attribute="strength">+</button>
+                    </div>
+                    <div>影响攻击力</div>
+                </div>
+                <div class="attribute">
+                    <div>敏 (敏捷)</div>
+                    <div>
+                        <span id="attr-agility">10</span>
+                        <button class="attribute-btn" data-attribute="agility">+</button>
+                    </div>
+                    <div>影响闪避</div>
+                </div>
+                <div class="attribute">
+                    <div>精 (精准)</div>
+                    <div>
+                        <span id="attr-precision">10</span>
+                        <button class="attribute-btn" data-attribute="precision">+</button>
+                    </div>
+                    <div>影响暴击</div>
+                </div>
+                <div class="attribute">
+                    <div>体 (体力)</div>
+                    <div>
+                        <span id="attr-vitality">10</span>
+                        <button class="attribute-btn" data-attribute="vitality">+</button>
+                    </div>
+                    <div>影响血量</div>
+                </div>
+                <div class="attribute">
+                    <div>耐 (耐力)</div>
+                    <div>
+                        <span id="attr-endurance">10</span>
+                        <button class="attribute-btn" data-attribute="endurance">+</button>
+                    </div>
+                    <div>影响防御</div>
+                </div>
+            </div>
+            <div>
+                可用属性点: <span id="available-points">5</span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div>
+                <div id="enemy-selector">
+                    <h3>选择敌人进行挑战</h3>
+                    <button id="generate-enemy-btn">生成匹配敌人</button>
+                    <div id="enemy-encounter">
+                        <h4>遭遇战</h4>
+                        <div id="enemy-group">
+                            <!-- 敌人组将通过JS动态生成 -->
+                        </div>
+                        <button id="start-encounter-btn">开始战斗</button>
+                    </div>
+                    <div class="enemy-buttons">
+                        <button class="enemy-btn" data-enemy="goblin">
+                            <div class="enemy-name">哥布林</div>
+                            <div class="enemy-level">等级 1</div>
+                        </button>
+                        <button class="enemy-btn" data-enemy="orc">
+                            <div class="enemy-name">兽人</div>
+                            <div class="enemy-level">等级 3</div>
+                        </button>
+                        <button class="enemy-btn" data-enemy="dragon">
+                            <div class="enemy-name">龙</div>
+                            <div class="enemy-level">等级 10</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="combat-arena">
+                    <h3>战斗竞技场</h3>
+                    <div class="combatants">
+                        <div class="combatant player-combatant">
+                            <div>冒险者</div>
+                            <div class="combatant-name">你</div>
+                        </div>
+                        <div class="combatant enemy-combatant" id="enemy-combatant">
+                            <div id="enemy-name">敌人</div>
+                            <div class="combatant-name" id="enemy-combatant-name">敌人</div>
+                        </div>
+                    </div>
+                    <div id="combat-status">
+                        <div id="enemy-health-bar">
+                            <div id="enemy-health-fill"></div>
+                        </div>
+                        <p id="enemy-health-text">敌人生命值: 100%</p>
+                    </div>
+                    <div>
+                        <button id="attack-btn" class="attack-button">普通攻击</button>
+                        <button id="skill-btn" class="skill-button">使用技能</button>
+                        <button id="flee-btn" class="flee-button">逃跑</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div id="equipment-panel">
+                    <h3>装备栏</h3>
+                    <div id="equipment-slots">
+                        <div class="equipment-slot" data-slot="weapon">
+                            <div>武器</div>
+                            <div id="slot-weapon">空</div>
+                        </div>
+                        <div class="equipment-slot" data-slot="head">
+                            <div>头盔</div>
+                            <div id="slot-head">空</div>
+                        </div>
+                        <div class="equipment-slot" data-slot="chest">
+                            <div>胸甲</div>
+                            <div id="slot-chest">空</div>
+                        </div>
+                        <div class="equipment-slot" data-slot="hands">
+                            <div>手套</div>
+                            <div id="slot-hands">空</div>
+                        </div>
+                        <div class="equipment-slot" data-slot="legs">
+                            <div>裤子</div>
+                            <div id="slot-legs">空</div>
+                        </div>
+                        <div class="equipment-slot" data-slot="feet">
+                            <div>靴子</div>
+                            <div id="slot-feet">空</div>
+                        </div>
+                        <div class="equipment-slot" data-slot="ring">
+                            <div>戒指</div>
+                            <div id="slot-ring">空</div>
+                        </div>
+                        <div class="equipment-slot" data-slot="neck">
+                            <div>项链</div>
+                            <div id="slot-neck">空</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="combat-log">
+            <h4>战斗日志</h4>
+            <div id="log-content">准备好开始冒险了吗？选择一个敌人开始挑战！</div>
+        </div>
+        
+        <div id="loot-display">
+            <h3>战利品</h3>
+            <div id="loot-list">点击上方敌人按钮开始战斗获取掉落</div>
+        </div>
+        
+        <div id="crafting-panel">
+            <h3>工艺系统</h3>
+            <div>
+                <div>
+                    <h4>装备拓印</h4>
+                    <p>消耗装备耐久度拓印词缀为铭文</p>
+                    <button id="open-imprint-btn">打开拓印面板</button>
+                </div>
+                <div>
+                    <h4>装备铭刻</h4>
+                    <p>消耗耐久度铭刻铭文到装备</p>
+                    <button id="open-enchant-btn">打开铭刻面板</button>
+                </div>
+                <div>
+                    <h4>装备分解</h4>
+                    <p>分解装备获得强化材料</p>
+                    <button id="open-disassemble-btn">打开分解面板</button>
+                </div>
+                <div>
+                    <h4>装备强化</h4>
+                    <p>强化装备基本属性</p>
+                    <button id="open-enhance-btn">打开强化面板</button>
+                </div>
+                <div>
+                    <h4>铭文合成</h4>
+                    <p>合成高级铭文</p>
+                    <button id="open-inscription-btn">打开合成台</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 拓印面板 -->
+        <div id="imprint-panel">
+            <h3>装备拓印</h3>
+            <div id="imprint-items">
+                <!-- 可拓印的装备将在此显示 -->
+            </div>
+        </div>
+        
+        <!-- 铭刻面板 -->
+        <div id="enchant-panel">
+            <h3>装备铭刻</h3>
+            <div>
+                <div>
+                    <h4>选择装备</h4>
+                    <div id="enchant-equipments"></div>
+                </div>
+                <div>
+                    <h4>选择铭文</h4>
+                    <div id="enchant-inscriptions"></div>
+                </div>
+            </div>
+            <div>
+                <button id="enchant-button" disabled>开始铭刻</button>
+            </div>
+        </div>
+        
+        <!-- 分解面板 -->
+        <div id="disassemble-panel">
+            <h3>装备分解</h3>
+            <div id="disassemble-items"></div>
+        </div>
+        
+        <!-- 强化面板 -->
+        <div id="enhance-panel">
+            <h3>装备强化</h3>
+            <div>
+                <div>
+                    <h4>选择装备</h4>
+                    <div id="enhance-equipments"></div>
+                </div>
+                <div>
+                    <h4>强化材料</h4>
+                    <div id="enhance-materials"></div>
+                </div>
+            </div>
+            <div>
+                <button id="enhance-button" disabled>开始强化</button>
+            </div>
+        </div>
+        
+        <!-- 铭文合成台面板 -->
+        <div id="inscription-panel">
+            <h3>铭文合成台</h3>
+            <div>
+                <div>
+                    <h4>选择铭文 1</h4>
+                    <div id="inscription-1"></div>
+                </div>
+                <div>
+                    <button id="combine-button" disabled>合成</button>
+                </div>
+                <div>
+                    <h4>选择铭文 2</h4>
+                    <div id="inscription-2"></div>
+                </div>
+            </div>
+            <div id="combine-result">
+                <h4>合成结果预览</h4>
+                <div id="result-preview">选择两个同等级同名铭文进行合成</div>
+            </div>
+        </div>
+        
+        <div id="game-footer">
+            <p>© 2026 RPG刷宝游戏 | 版本 1.0.0</p>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+    <script src="game_logic.js"></script>
+</body>
+</html>

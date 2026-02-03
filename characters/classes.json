@@ -1,0 +1,114 @@
+{
+  "classes": [
+    {
+      "id": "warrior",
+      "name": "战士",
+      "base_attributes": {
+        "strength": 15,
+        "agility": 10,
+        "precision": 10,
+        "vitality": 12,
+        "endurance": 13
+      },
+      "growth_rates": {
+        "strength": 2.0,
+        "agility": 1.0,
+        "precision": 1.0,
+        "vitality": 1.5,
+        "endurance": 1.8
+      },
+      "primary_attribute": "strength",
+      "specialization": "melee_combat",
+      "starting_skills": ["bash", "defend"],
+      "equipment_preferences": ["sword", "axe", "heavy_armor"]
+    },
+    {
+      "id": "mage",
+      "name": "法师",
+      "base_attributes": {
+        "strength": 8,
+        "agility": 10,
+        "precision": 12,
+        "vitality": 9,
+        "endurance": 8
+      },
+      "growth_rates": {
+        "strength": 0.8,
+        "agility": 1.0,
+        "precision": 1.5,
+        "vitality": 1.0,
+        "endurance": 0.8
+      },
+      "primary_attribute": "precision",
+      "specialization": "magic_spells",
+      "starting_skills": ["fire_ball", "frost_bolt"],
+      "equipment_preferences": ["staff", "light_armor", "accessories"]
+    },
+    {
+      "id": "rogue",
+      "name": "盗贼",
+      "base_attributes": {
+        "strength": 10,
+        "agility": 15,
+        "precision": 13,
+        "vitality": 10,
+        "endurance": 9
+      },
+      "growth_rates": {
+        "strength": 1.0,
+        "agility": 2.0,
+        "precision": 1.8,
+        "vitality": 1.0,
+        "endurance": 1.0
+      },
+      "primary_attribute": "agility",
+      "specialization": "ranged_combat",
+      "starting_skills": ["backstab", "stealth"],
+      "equipment_preferences": ["bow", "dagger", "light_armor"]
+    },
+    {
+      "id": "tank",
+      "name": "坦克",
+      "base_attributes": {
+        "strength": 12,
+        "agility": 8,
+        "precision": 9,
+        "vitality": 14,
+        "endurance": 15
+      },
+      "growth_rates": {
+        "strength": 1.2,
+        "agility": 0.8,
+        "precision": 0.8,
+        "vitality": 1.8,
+        "endurance": 2.0
+      },
+      "primary_attribute": "endurance",
+      "specialization": "defense",
+      "starting_skills": ["taunt", "shield_block"],
+      "equipment_preferences": ["shield", "heavy_armor"]
+    },
+    {
+      "id": "hunter",
+      "name": "猎人",
+      "base_attributes": {
+        "strength": 11,
+        "agility": 13,
+        "precision": 14,
+        "vitality": 11,
+        "endurance": 10
+      },
+      "growth_rates": {
+        "strength": 1.1,
+        "agility": 1.8,
+        "precision": 2.0,
+        "vitality": 1.2,
+        "endurance": 1.1
+      },
+      "primary_attribute": "precision",
+      "specialization": "ranged_combat",
+      "starting_skills": ["aimed_shot", "tracking"],
+      "equipment_preferences": ["bow", "crossbow", "medium_armor"]
+    }
+  ]
+}
