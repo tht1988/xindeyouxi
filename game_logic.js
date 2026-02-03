@@ -359,10 +359,10 @@ let selectedInscription2 = null;
 window.gameLoaded = function() {
     const loadingTime = (Date.now() - loadingStartTime) / 1000;
     
-    if (DOM.statusText) {
+    if (DOM && DOM.statusText) {
         DOM.statusText.textContent = '就绪';
     }
-    if (DOM.loadingIndicator) {
+    if (DOM && DOM.loadingIndicator) {
         DOM.loadingIndicator.style.display = 'none';
     }
     
@@ -382,10 +382,10 @@ window.gameLoaded = function() {
 
 // 游戏加载失败回调
 window.gameLoadFailed = function(errorMessage) {
-    if (DOM.statusText) {
+    if (DOM && DOM.statusText) {
         DOM.statusText.textContent = '加载失败';
     }
-    if (DOM.loadingIndicator) {
+    if (DOM && DOM.loadingIndicator) {
         DOM.loadingIndicator.style.display = 'none';
     }
     addToLog(`错误：游戏数据加载失败 - ${errorMessage}`);
@@ -401,29 +401,29 @@ addToLog('正在加载游戏数据，请稍候...');
 // 初始化事件监听器
 function initEventListeners() {
     // 保存/加载游戏
-    if (DOM.saveGameBtn) DOM.saveGameBtn.addEventListener('click', saveGame);
-    if (DOM.loadGameBtn) DOM.loadGameBtn.addEventListener('click', loadGame);
+    if (DOM && DOM.saveGameBtn) DOM.saveGameBtn.addEventListener('click', saveGame);
+    if (DOM && DOM.loadGameBtn) DOM.loadGameBtn.addEventListener('click', loadGame);
     
     // 生成敌人
-    if (DOM.generateEnemyBtn) DOM.generateEnemyBtn.addEventListener('click', generateEnemyEncounter);
-    if (DOM.startEncounterBtn) DOM.startEncounterBtn.addEventListener('click', startEncounter);
+    if (DOM && DOM.generateEnemyBtn) DOM.generateEnemyBtn.addEventListener('click', generateEnemyEncounter);
+    if (DOM && DOM.startEncounterBtn) DOM.startEncounterBtn.addEventListener('click', startEncounter);
     
     // 战斗按钮
-    if (DOM.attackBtn) DOM.attackBtn.addEventListener('click', attackEnemy);
-    if (DOM.skillBtn) DOM.skillBtn.addEventListener('click', useSkill);
-    if (DOM.fleeBtn) DOM.fleeBtn.addEventListener('click', fleeCombat);
+    if (DOM && DOM.attackBtn) DOM.attackBtn.addEventListener('click', attackEnemy);
+    if (DOM && DOM.skillBtn) DOM.skillBtn.addEventListener('click', useSkill);
+    if (DOM && DOM.fleeBtn) DOM.fleeBtn.addEventListener('click', fleeCombat);
     
     // 工艺系统按钮
-    if (DOM.openImprintBtn) DOM.openImprintBtn.addEventListener('click', openImprintPanel);
-    if (DOM.openEnchantBtn) DOM.openEnchantBtn.addEventListener('click', openEnchantPanel);
-    if (DOM.openDisassembleBtn) DOM.openDisassembleBtn.addEventListener('click', openDisassemblePanel);
-    if (DOM.openEnhanceBtn) DOM.openEnhanceBtn.addEventListener('click', openEnhancePanel);
-    if (DOM.openInscriptionBtn) DOM.openInscriptionBtn.addEventListener('click', openInscriptionPanel);
+    if (DOM && DOM.openImprintBtn) DOM.openImprintBtn.addEventListener('click', openImprintPanel);
+    if (DOM && DOM.openEnchantBtn) DOM.openEnchantBtn.addEventListener('click', openEnchantPanel);
+    if (DOM && DOM.openDisassembleBtn) DOM.openDisassembleBtn.addEventListener('click', openDisassemblePanel);
+    if (DOM && DOM.openEnhanceBtn) DOM.openEnhanceBtn.addEventListener('click', openEnhancePanel);
+    if (DOM && DOM.openInscriptionBtn) DOM.openInscriptionBtn.addEventListener('click', openInscriptionPanel);
     
     // 面板按钮
-    if (DOM.enchantButton) DOM.enchantButton.addEventListener('click', enchantItem);
-    if (DOM.enhanceButton) DOM.enhanceButton.addEventListener('click', enhanceItem);
-    if (DOM.combineButton) DOM.combineButton.addEventListener('click', combineInscriptions);
+    if (DOM && DOM.enchantButton) DOM.enchantButton.addEventListener('click', enchantItem);
+    if (DOM && DOM.enhanceButton) DOM.enhanceButton.addEventListener('click', enhanceItem);
+    if (DOM && DOM.combineButton) DOM.combineButton.addEventListener('click', combineInscriptions);
     
     // 属性加点按钮
     const attributeBtns = document.querySelectorAll('.attribute-btn');
@@ -447,13 +447,13 @@ function initEventListeners() {
 // 立即检查game对象
 setTimeout(() => {
     if (typeof game === 'undefined') {
-        if (DOM.statusText) DOM.statusText.textContent = '初始化失败';
-        if (DOM.loadingIndicator) DOM.loadingIndicator.style.display = 'none';
+        if (DOM && DOM.statusText) DOM.statusText.textContent = '初始化失败';
+        if (DOM && DOM.loadingIndicator) DOM.loadingIndicator.style.display = 'none';
         addToLog('错误：游戏对象未初始化');
         return;
     }
     
-    if (DOM.statusText) DOM.statusText.textContent = '加载中...';
+    if (DOM && DOM.statusText) DOM.statusText.textContent = '加载中...';
     addToLog('游戏对象已初始化，正在等待数据加载...');
     
     // 初始化事件监听器
@@ -485,15 +485,15 @@ async function selectEnemy(enemyId) {
         addToLog('战斗开始...');
         
         // 显示战斗竞技场
-        if (DOM.combatArena) {
+        if (DOM && DOM.combatArena) {
             DOM.combatArena.style.display = 'block';
         }
         
         // 更新敌人名称
-        if (DOM.enemyName) {
+        if (DOM && DOM.enemyName) {
             DOM.enemyName.textContent = currentEnemy.name;
         }
-        if (DOM.enemyCombatantName) {
+        if (DOM && DOM.enemyCombatantName) {
             DOM.enemyCombatantName.textContent = currentEnemy.name;
         }
         
@@ -620,7 +620,7 @@ function calculateDamage(attack, defense) {
 
 // 更新敌人生命值条
 function updateEnemyHealthBar(percentage) {
-    if (DOM.enemyHealthFill && DOM.enemyHealthText) {
+    if (DOM && DOM.enemyHealthFill && DOM.enemyHealthText) {
         DOM.enemyHealthFill.style.width = percentage + '%';
         DOM.enemyHealthText.textContent = `敌人生命值: ${Math.round(percentage)}%`;
     }
@@ -628,7 +628,7 @@ function updateEnemyHealthBar(percentage) {
 
 // 更新玩家生命值显示
 function updatePlayerHealth() {
-    if (DOM.playerHealth) {
+    if (DOM && DOM.playerHealth) {
         DOM.playerHealth.textContent = `${Math.round(player.health)}/${player.maxHealth}`;
     }
 }
@@ -682,7 +682,7 @@ async function useSkill() {
 
 // 更新玩家魔法值显示
 function updatePlayerMana() {
-    if (DOM.playerMana) {
+    if (DOM && DOM.playerMana) {
         DOM.playerMana.textContent = `${Math.round(player.mana)}/${player.maxMana}`;
     }
 }
@@ -697,7 +697,7 @@ function fleeCombat() {
     addToLog('你成功逃跑了！');
     
     // 隐藏战斗竞技场
-    if (DOM.combatArena) {
+    if (DOM && DOM.combatArena) {
         DOM.combatArena.style.display = 'none';
     }
     currentEnemy = null;
@@ -705,7 +705,7 @@ function fleeCombat() {
 
 // 显示掉落
 function displayLoot(loot, enemy) {
-    if (!DOM.lootList) return;
+    if (!DOM || !DOM.lootList) return;
     
     currentLoot = loot;
     
@@ -769,7 +769,7 @@ function equipItem(index) {
     addToLog(`穿戴了 ${item.final_name}`);
     
     // 更新装备栏显示
-    if (DOM.equipmentSlots[slot]) {
+    if (DOM && DOM.equipmentSlots && DOM.equipmentSlots[slot]) {
         const slotElement = DOM.equipmentSlots[slot];
         slotElement.innerHTML = `${item.name}<br><span class="item-level">耐久: ${Math.round(item.durability)}/${item.maxDurability}</span>`;
         slotElement.style.color = game.lootSystem.rarity[item.rarity].color;
@@ -778,7 +778,7 @@ function equipItem(index) {
 
 // 添加日志
 function addToLog(message) {
-    if (!DOM.logContent) return;
+    if (!DOM || !DOM.logContent) return;
     
     const logEntry = document.createElement('div');
     logEntry.textContent = `> ${message}`;
@@ -802,10 +802,10 @@ function addAttributePoint(attribute) {
     player.availableAttributePoints--;
     
     // 更新显示
-    if (DOM.attributes[attribute]) {
+    if (DOM && DOM.attributes && DOM.attributes[attribute]) {
         DOM.attributes[attribute].textContent = player.attributes[attribute];
     }
-    if (DOM.availablePoints) {
+    if (DOM && DOM.availablePoints) {
         DOM.availablePoints.textContent = player.availableAttributePoints;
     }
     
@@ -836,7 +836,7 @@ function updateDerivedAttributes() {
     player.health = Math.min(player.health, player.maxHealth);
     
     // 更新显示
-    if (DOM.playerHealth) {
+    if (DOM && DOM.playerHealth) {
         DOM.playerHealth.textContent = `${Math.round(player.health)}/${player.maxHealth}`;
     }
 }
@@ -870,7 +870,7 @@ function initClassSelection() {
         classButtons.appendChild(button);
     });
     
-    if (DOM.classSelection) {
+    if (DOM && DOM.classSelection) {
         DOM.classSelection.style.display = 'block';
     }
 }
@@ -890,7 +890,7 @@ function selectClass(classId) {
     player.growthRates = cls.growth_rates;
     
     // 隐藏职业选择界面
-    if (DOM.classSelection) {
+    if (DOM && DOM.classSelection) {
         DOM.classSelection.style.display = 'none';
     }
     
@@ -904,11 +904,11 @@ function selectClass(classId) {
 // 初始化属性显示
 function initAttributeDisplay() {
     Object.entries(player.attributes).forEach(([key, value]) => {
-        if (DOM.attributes[key]) {
+        if (DOM && DOM.attributes && DOM.attributes[key]) {
             DOM.attributes[key].textContent = value;
         }
     });
-    if (DOM.availablePoints) {
+    if (DOM && DOM.availablePoints) {
         DOM.availablePoints.textContent = player.availableAttributePoints;
     }
     updateDerivedAttributes();
@@ -986,7 +986,7 @@ function adjustEnemyAttributes(enemy) {
 
 // 显示敌人组
 function displayEnemyGroup() {
-    if (!DOM.enemyGroup) return;
+    if (!DOM || !DOM.enemyGroup) return;
     
     DOM.enemyGroup.innerHTML = '';
     
@@ -1012,7 +1012,7 @@ function displayEnemyGroup() {
         DOM.enemyGroup.appendChild(enemyInfo);
     });
     
-    if (DOM.enemyEncounter) {
+    if (DOM && DOM.enemyEncounter) {
         DOM.enemyEncounter.style.display = 'block';
     }
 }
