@@ -320,15 +320,56 @@
         
         // 等待游戏加载完成
         setTimeout(() => {
-            document.getElementById('status-text').textContent = '就绪';
-            document.getElementById('loading-indicator').style.display = 'none';
-            gameReady = true;
-            addToLog('游戏加载完成，准备好开始冒险了！');
+            // 检查game对象是否存在
+            if (typeof game === 'undefined') {
+                document.getElementById('status-text').textContent = '游戏初始化失败';
+                document.getElementById('loading-indicator').style.display = 'none';
+                addToLog('错误：游戏对象未初始化');
+                return;
+            }
+            
+            // 检查enemies数组是否加载
+            if (game.enemies && game.enemies.length > 0) {
+                document.getElementById('status-text').textContent = '就绪';
+                document.getElementById('loading-indicator').style.display = 'none';
+                gameReady = true;
+                addToLog('游戏加载完成，准备好开始冒险了！');
+                addToLog(`成功加载了 ${game.enemies.length} 个敌人`);
+            } else {
+                document.getElementById('status-text').textContent = '数据加载中...';
+                addToLog('正在等待游戏数据加载...');
+                
+                // 再次检查
+                setTimeout(checkGameData, 500);
+            }
         }, 1000);
+        
+        function checkGameData() {
+            if (game.enemies && game.enemies.length > 0) {
+                document.getElementById('status-text').textContent = '就绪';
+                document.getElementById('loading-indicator').style.display = 'none';
+                gameReady = true;
+                addToLog('游戏数据加载完成！');
+                addToLog(`成功加载了 ${game.enemies.length} 个敌人`);
+            } else {
+                document.getElementById('status-text').textContent = '数据加载中...';
+                addToLog('游戏数据加载延迟，请稍候...');
+            }
+        }
         
         function selectEnemy(enemyId) {
             if (!gameReady) {
                 addToLog('游戏尚未加载完成，请稍候...');
+                return;
+            }
+            
+            if (!game) {
+                addToLog('错误：游戏对象未初始化');
+                return;
+            }
+            
+            if (!game.enemies) {
+                addToLog('错误：敌人数据未加载');
                 return;
             }
             
@@ -345,9 +386,17 @@
                     addToLog(`获得了 ${currentEnemy.experience} 点经验值！`);
                     
                     // 生成掉落
-                    const loot = game.generateLoot(currentEnemy);
-                    displayLoot(loot, currentEnemy);
+                    try {
+                        const loot = game.generateLoot(currentEnemy);
+                        displayLoot(loot, currentEnemy);
+                    } catch (error) {
+                        addToLog('错误：生成掉落时发生错误');
+                        console.error('生成掉落错误:', error);
+                    }
                 }, 1500);
+            } else {
+                addToLog(`错误：未找到敌人 ${enemyId}`);
+                console.error('未找到敌人:', enemyId);
             }
         }
         
