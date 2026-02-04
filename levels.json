@@ -1,0 +1,165 @@
+{
+  "levels": [
+    {
+      "id": "level_1",
+      "name": "新手村",
+      "description": "宁静的新手村，适合初学者练习基本技能",
+      "required_level": 1,
+      "enemies": [
+        {
+          "id": "goblin_1",
+          "count": 5,
+          "difficulty": "easy",
+          "position": "village_entrance"
+        },
+        {
+          "id": "rat_1",
+          "count": 3,
+          "difficulty": "easy",
+          "position": "village_backyard"
+        }
+      ],
+      "boss": null,
+      "objectives": [
+        {
+          "type": "kill_enemies",
+          "target": 5,
+          "description": "击败5个敌人"
+        },
+        {
+          "type": "explore_area",
+          "target": "village_center",
+          "description": "到达新手村中心"
+        }
+      ],
+      "victory_conditions": "kill_enemies && explore_area",
+      "defeat_conditions": "player_death",
+      "rewards": {
+        "experience": 200,
+        "gold": 150,
+        "items": ["新手武器", "新手护甲"]
+      }
+    },
+    {
+      "id": "level_2",
+      "name": "幽暗森林",
+      "description": "神秘的森林，隐藏着各种危险",
+      "required_level": 3,
+      "enemies": [
+        {
+          "id": "wolf_1",
+          "count": 4,
+          "difficulty": "normal",
+          "position": "forest_edge"
+        },
+        {
+          "id": "goblin_2",
+          "count": 3,
+          "difficulty": "normal",
+          "position": "forest_path"
+        }
+      ],
+      "boss": {
+        "id": "forest_goblin_chief",
+        "difficulty": "elite",
+        "position": "forest_clearing"
+      },
+      "objectives": [
+        {
+          "type": "kill_enemies",
+          "target": 7,
+          "description": "击败7个敌人"
+        },
+        {
+          "type": "defeat_boss",
+          "target": "forest_goblin_chief",
+          "description": "击败森林哥布林酋长"
+        }
+      ],
+      "victory_conditions": "kill_enemies && defeat_boss",
+      "defeat_conditions": "player_death || time_limit",
+      "time_limit": 300,
+      "rewards": {
+        "experience": 500,
+        "gold": 300,
+        "items": ["森林之刃", "自然护甲", "治疗药水 x 3"]
+      }
+    },
+    {
+      "id": "level_3",
+      "name": "废弃矿洞",
+      "description": "危险的矿洞，充满了邪恶的生物",
+      "required_level": 5,
+      "enemies": [
+        {
+          "id": "skeleton_1",
+          "count": 6,
+          "difficulty": "normal",
+          "position": "mine_entrance"
+        },
+        {
+          "id": "spider_1",
+          "count": 4,
+          "difficulty": "normal",
+          "position": "mine_tunnels"
+        },
+        {
+          "id": "goblin_miner",
+          "count": 3,
+          "difficulty": "hard",
+          "position": "mine_depths"
+        }
+      ],
+      "boss": {
+        "id": "mine_golem",
+        "difficulty": "boss",
+        "position": "mine_core"
+      },
+      "objectives": [
+        {
+          "type": "kill_enemies",
+          "target": 10,
+          "description": "击败10个敌人"
+        },
+        {
+          "type": "collect_item",
+          "target": "mine_core_crystal",
+          "description": "收集矿洞核心水晶"
+        },
+        {
+          "type": "defeat_boss",
+          "target": "mine_golem",
+          "description": "击败矿洞魔像"
+        }
+      ],
+      "victory_conditions": "kill_enemies && collect_item && defeat_boss",
+      "defeat_conditions": "player_death || time_limit",
+      "time_limit": 420,
+      "rewards": {
+        "experience": 1000,
+        "gold": 600,
+        "items": ["矿洞之锤", "石肤护甲", "力量药水 x 2", "魔法药水 x 2"]
+      }
+    }
+  ],
+  "global_settings": {
+    "max_level": 10,
+    "difficulty_scaling": {
+      "easy": 0.8,
+      "normal": 1.0,
+      "hard": 1.2,
+      "elite": 1.5,
+      "boss": 2.0
+    },
+    "victory_conditions": {
+      "kill_enemies": "player has killed the required number of enemies",
+      "explore_area": "player has reached the target area",
+      "defeat_boss": "player has defeated the boss",
+      "collect_item": "player has collected the target item"
+    },
+    "defeat_conditions": {
+      "player_death": "player's health reaches 0",
+      "time_limit": "time runs out"
+    }
+  }
+}

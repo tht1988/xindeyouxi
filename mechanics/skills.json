@@ -1,0 +1,1477 @@
+{
+  "skill_system": {
+    "phases": [
+      {
+        "level_range": "1-20",
+        "focus": "生存为主，辅助伤害",
+        "available_skills_per_class": 3
+      },
+      {
+        "level_range": "21-45",
+        "focus": "伤害和增益buff为主，辅助减伤/抗性/闪避",
+        "available_skills_per_class": 3
+      },
+      {
+        "level_range": "46-80",
+        "focus": "持续伤血debuff为主，辅助属性增伤",
+        "available_skills_per_class": 3
+      },
+      {
+        "level_range": "81-99",
+        "focus": "高伤害或群体中等伤害，附加强力属性攻击",
+        "available_skills_per_class": 3
+      }
+    ]
+  },
+  "skills": {
+    "warrior": {
+      "phase1": [
+        {
+          "id": "bash",
+          "name": "猛击",
+          "description": "对单个目标造成物理伤害，有几率击晕目标",
+          "level_requirement": 1,
+          "cost": {
+            "mana": 0,
+            "stamina": 10
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.5",
+              "element": "physical"
+            },
+            {
+              "type": "stun",
+              "chance": 18,
+              "duration": 1
+            }
+          ],
+          "scaling": {
+            "damage": 5,
+            "stun_chance": 2
+          }
+        },
+        {
+          "id": "defend",
+          "name": "防御姿态",
+          "description": "进入防御姿态，增加护甲和抗性",
+          "level_requirement": 1,
+          "cost": {
+            "mana": 0,
+            "stamina": 8
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "armor",
+              "value": 15,
+              "duration": 3
+            },
+            {
+              "type": "buff",
+              "stat": "all_resistances",
+              "value": 10,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "armor": 3,
+            "resistances": 2
+          }
+        },
+        {
+          "id": "anger",
+          "name": "愤怒",
+          "description": "激发愤怒，增加怒气值和攻击力",
+          "level_requirement": 5,
+          "cost": {
+            "mana": 0,
+            "stamina": 12
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "attack_power",
+              "value": 10,
+              "duration": 3
+            },
+            {
+              "type": "resource_gain",
+              "resource": "rage",
+              "value": 20
+            }
+          ],
+          "scaling": {
+            "attack_power": 2,
+            "rage_gain": 5
+          },
+          "prerequisites": []
+        },
+        {
+          "id": "warrior_stance",
+          "name": "战士姿态",
+          "description": "切换到战士姿态，增加生命值上限和生命恢复",
+          "level_requirement": 10,
+          "cost": {
+            "mana": 0,
+            "stamina": 5
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "health_max",
+              "value": 50,
+              "duration": 0
+            },
+            {
+              "type": "buff",
+              "stat": "health_regen",
+              "value": 2,
+              "duration": 0
+            }
+          ],
+          "scaling": {
+            "health_max": 10,
+            "health_regen": 0.5
+          }
+        }
+      ],
+      "phase2": [
+        {
+          "id": "rage_slash",
+          "name": "怒气斩",
+          "description": "消耗所有怒气，造成高额伤害并附带火焰伤害",
+          "level_requirement": 21,
+          "cost": {
+            "mana": 0,
+            "rage": "all"
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 2.0 + rage * 0.5",
+              "element": "physical"
+            },
+            {
+              "type": "dot",
+              "name": "burning",
+              "value": 5,
+              "duration": 3,
+              "stacks": 3
+            },
+            {
+              "type": "taunt",
+              "duration": 1
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "burn_damage": 1
+          },
+          "prerequisites": ["anger"],
+          "synergies": [
+            {
+              "skill": "anger",
+              "bonus": "damage",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "id": "battle_shout",
+          "name": "战斗呐喊",
+          "description": "增加自身和队友的攻击力和暴击率",
+          "level_requirement": 25,
+          "cost": {
+            "mana": 0,
+            "stamina": 20
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "attack_power",
+              "value": 15,
+              "duration": 5,
+              "target": "self_and_allies"
+            },
+            {
+              "type": "buff",
+              "stat": "critical_chance",
+              "value": 5,
+              "duration": 5,
+              "target": "self_and_allies"
+            }
+          ],
+          "scaling": {
+            "attack_power": 3,
+            "critical_chance": 1
+          }
+        },
+        {
+          "id": "iron_skin",
+          "name": "铁肤",
+          "description": "增加护甲和物理抗性",
+          "level_requirement": 30,
+          "cost": {
+            "mana": 0,
+            "stamina": 15
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "armor",
+              "value": 30,
+              "duration": 4
+            },
+            {
+              "type": "buff",
+              "stat": "physical_resistance",
+              "value": 15,
+              "duration": 4
+            }
+          ],
+          "scaling": {
+            "armor": 5,
+            "physical_resistance": 3
+          }
+        },
+        {
+          "id": "whirlwind",
+          "name": "旋风斩",
+          "description": "对周围敌人造成物理伤害",
+          "level_requirement": 35,
+          "cost": {
+            "mana": 0,
+            "stamina": 25
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.5",
+              "element": "physical",
+              "target": "all_nearby"
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1
+          }
+        }
+      ],
+      "phase3": [
+        {
+          "id": "bleeding_strike",
+          "name": "流血打击",
+          "description": "对目标造成伤害并附带流血效果",
+          "level_requirement": 46,
+          "cost": {
+            "mana": 0,
+            "stamina": 20
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.8",
+              "element": "physical"
+            },
+            {
+              "type": "dot",
+              "name": "bleeding",
+              "value": 8,
+              "duration": 5,
+              "stacks": 5
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "bleed_damage": 1,
+            "bleed_duration": 0.5
+          },
+          "synergies": [
+            {
+              "condition": "target_has_bleed",
+              "bonus": "damage",
+              "value": 10
+            }
+          ]
+        },
+        {
+          "id": "poisoned_blade",
+          "name": "毒刃",
+          "description": "涂抹毒药，攻击时附带中毒效果",
+          "level_requirement": 50,
+          "cost": {
+            "mana": 0,
+            "stamina": 15,
+            "duration": 10
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "poison_damage",
+              "value": 5,
+              "duration": 10
+            },
+            {
+              "type": "on_hit_effect",
+              "effect": {
+                "type": "dot",
+                "name": "poison",
+                "value": 6,
+                "duration": 4,
+                "stacks": 3
+              }
+            }
+          ],
+          "scaling": {
+            "poison_damage": 1,
+            "dot_value": 1,
+            "duration": 1
+          },
+          "synergies": [
+            {
+              "condition": "target_has_poison",
+              "bonus": "damage",
+              "value": 8
+            }
+          ]
+        },
+        {
+          "id": "burning_axe",
+          "name": "燃烧之斧",
+          "description": "武器附魔火焰，攻击时附带烧伤效果",
+          "level_requirement": 55,
+          "cost": {
+            "mana": 0,
+            "stamina": 20,
+            "duration": 10
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "fire_damage",
+              "value": 7,
+              "duration": 10
+            },
+            {
+              "type": "on_hit_effect",
+              "effect": {
+                "type": "dot",
+                "name": "burning",
+                "value": 7,
+                "duration": 3,
+                "stacks": 4
+              }
+            }
+          ],
+          "scaling": {
+            "fire_damage": 1.5,
+            "dot_value": 1.5
+          }
+        },
+        {
+          "id": "deep_wounds",
+          "name": "重伤",
+          "description": "对带有debuff的目标造成额外伤害",
+          "level_requirement": 60,
+          "cost": {
+            "mana": 0,
+            "stamina": 25
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 2.2",
+              "element": "physical"
+            },
+            {
+              "type": "debuff",
+              "stat": "healing_received",
+              "value": -20,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.15,
+            "healing_penalty": -5
+          },
+          "synergies": [
+            {
+              "condition": "target_has_any_debuff",
+              "bonus": "damage",
+              "value": 15
+            }
+          ]
+        }
+      ],
+      "phase4": [
+        {
+          "id": "berserker_rage",
+          "name": "狂暴",
+          "description": "进入狂暴状态，力量属性翻倍，但受到伤害增加",
+          "level_requirement": 81,
+          "cost": {
+            "mana": 0,
+            "stamina": 30
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "strength",
+              "value": "base * 1.0",
+              "duration": 3
+            },
+            {
+              "type": "debuff",
+              "stat": "damage_taken",
+              "value": 20,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "strength_multiplier": 0.1,
+            "damage_taken_increase": -5
+          }
+        },
+        {
+          "id": "execute",
+          "name": "处决",
+          "description": "对低生命值目标造成致命伤害",
+          "level_requirement": 85,
+          "cost": {
+            "mana": 0,
+            "stamina": 35,
+            "rage": 50
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 2.8",
+              "element": "physical"
+            },
+            {
+              "type": "damage_bonus",
+              "condition": "target_health_below_35%",
+              "value": 45
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.2
+          },
+          "prerequisites": ["anger", "rage_slash"]
+        },
+        {
+          "id": "war_cry",
+          "name": "战争咆哮",
+          "description": "发出战争咆哮，对周围敌人造成伤害并降低其攻击力",
+          "level_requirement": 90,
+          "cost": {
+            "mana": 0,
+            "stamina": 40
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 2.5",
+              "element": "physical",
+              "target": "all_nearby"
+            },
+            {
+              "type": "debuff",
+              "stat": "attack_power",
+              "value": -20,
+              "duration": 4,
+              "target": "all_nearby"
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.15,
+            "attack_power_decrease": -5
+          }
+        },
+        {
+          "id": "final_strike",
+          "name": "最终一击",
+          "description": "消耗所有资源，造成毁灭性伤害",
+          "level_requirement": 95,
+          "cost": {
+            "mana": "all",
+            "stamina": "all",
+            "rage": "all"
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "(strength * 4.0) + (stamina * 0.5) + (rage * 1.0)",
+              "element": "physical"
+            },
+            {
+              "type": "debuff",
+              "stat": "all_stats",
+              "value": -10,
+              "duration": 2
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.25
+          },
+          "prerequisites": ["anger", "rage_slash", "berserker_rage"]
+        }
+      ]
+    },
+    "assassin": {
+      "phase1": [
+        {
+          "id": "backstab",
+          "name": "背刺",
+          "description": "从背后攻击目标，造成高额伤害和暴击率",
+          "level_requirement": 1,
+          "cost": {
+            "mana": 0,
+            "energy": 15
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 1.8",
+              "element": "physical"
+            },
+            {
+              "type": "buff",
+              "stat": "critical_chance",
+              "value": 20,
+              "duration": 1
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "critical_chance": 5
+          }
+        },
+        {
+          "id": "stealth",
+          "name": "潜行",
+          "description": "进入潜行状态，增加闪避和移动速度",
+          "level_requirement": 1,
+          "cost": {
+            "mana": 0,
+            "energy": 10
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "dodge",
+              "value": 30,
+              "duration": 5
+            },
+            {
+              "type": "buff",
+              "stat": "movement_speed",
+              "value": 20,
+              "duration": 5
+            }
+          ],
+          "scaling": {
+            "dodge": 5,
+            "movement_speed": 5
+          }
+        },
+        {
+          "id": "poison_dagger",
+          "name": "毒匕首",
+          "description": "攻击时附带中毒效果",
+          "level_requirement": 5,
+          "cost": {
+            "mana": 0,
+            "energy": 12
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 1.2",
+              "element": "physical"
+            },
+            {
+              "type": "dot",
+              "name": "poison",
+              "value": 5,
+              "duration": 3,
+              "stacks": 3
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.08,
+            "poison_damage": 1
+          }
+        },
+        {
+          "id": "quick_step",
+          "name": "快步",
+          "description": "增加闪避和攻击速度",
+          "level_requirement": 10,
+          "cost": {
+            "mana": 0,
+            "energy": 8
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "dodge",
+              "value": 15,
+              "duration": 4
+            },
+            {
+              "type": "buff",
+              "stat": "attack_speed",
+              "value": 10,
+              "duration": 4
+            }
+          ],
+          "scaling": {
+            "dodge": 3,
+            "attack_speed": 2
+          }
+        }
+      ],
+      "phase2": [
+        {
+          "id": "shadow_strike",
+          "name": "暗影打击",
+          "description": "从暗影中攻击，造成伤害并降低目标防御",
+          "level_requirement": 21,
+          "cost": {
+            "mana": 0,
+            "energy": 25
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 2.0",
+              "element": "shadow"
+            },
+            {
+              "type": "debuff",
+              "stat": "armor",
+              "value": -20,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.12,
+            "armor_reduction": -5
+          },
+          "prerequisites": ["stealth"]
+        },
+        {
+          "id": "critical_mastery",
+          "name": "暴击精通",
+          "description": "增加暴击率和暴击伤害",
+          "level_requirement": 25,
+          "cost": {
+            "mana": 0,
+            "energy": 20
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "critical_chance",
+              "value": 10,
+              "duration": 5
+            },
+            {
+              "type": "buff",
+              "stat": "critical_damage",
+              "value": 20,
+              "duration": 5
+            }
+          ],
+          "scaling": {
+            "critical_chance": 2,
+            "critical_damage": 5
+          }
+        },
+        {
+          "id": "multi_strike",
+          "name": "多重打击",
+          "description": "快速攻击目标多次",
+          "level_requirement": 30,
+          "cost": {
+            "mana": 0,
+            "energy": 30
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 0.8",
+              "element": "physical",
+              "hits": 3
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "hits": 0.2
+          }
+        },
+        {
+          "id": "evasion",
+          "name": "闪避",
+          "description": "增加闪避率和移动速度",
+          "level_requirement": 35,
+          "cost": {
+            "mana": 0,
+            "energy": 15
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "dodge",
+              "value": 25,
+              "duration": 4
+            },
+            {
+              "type": "buff",
+              "stat": "movement_speed",
+              "value": 15,
+              "duration": 4
+            }
+          ],
+          "scaling": {
+            "dodge": 5,
+            "movement_speed": 3
+          }
+        }
+      ],
+      "phase3": [
+        {
+          "id": "bleeding_throw",
+          "name": "流血投掷",
+          "description": "投掷武器造成伤害并附带流血效果",
+          "level_requirement": 46,
+          "cost": {
+            "mana": 0,
+            "energy": 25
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 1.6",
+              "element": "physical"
+            },
+            {
+              "type": "dot",
+              "name": "bleeding",
+              "value": 10,
+              "duration": 6,
+              "stacks": 6
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "bleed_damage": 1.5,
+            "bleed_duration": 0.5
+          },
+          "synergies": [
+            {
+              "condition": "target_has_bleed",
+              "bonus": "critical_chance",
+              "value": 10
+            }
+          ]
+        },
+        {
+          "id": "neurotoxin",
+          "name": "神经毒素",
+          "description": "涂抹强力毒素，降低目标移动速度和攻击力",
+          "level_requirement": 50,
+          "cost": {
+            "mana": 0,
+            "energy": 20
+          },
+          "effects": [
+            {
+              "type": "dot",
+              "name": "neurotoxin",
+              "value": 8,
+              "duration": 5,
+              "stacks": 4
+            },
+            {
+              "type": "debuff",
+              "stat": "movement_speed",
+              "value": -30,
+              "duration": 3
+            },
+            {
+              "type": "debuff",
+              "stat": "attack_speed",
+              "value": -20,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "dot_value": 1.5,
+            "movement_speed_reduction": -5,
+            "attack_speed_reduction": -5
+          }
+        },
+        {
+          "id": "flame_blades",
+          "name": "火焰之刃",
+          "description": "武器附魔火焰，攻击时附带烧伤效果",
+          "level_requirement": 55,
+          "cost": {
+            "mana": 0,
+            "energy": 25
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "fire_damage",
+              "value": 8,
+              "duration": 8
+            },
+            {
+              "type": "on_hit_effect",
+              "effect": {
+                "type": "dot",
+                "name": "burning",
+                "value": 9,
+                "duration": 4,
+                "stacks": 5
+              }
+            }
+          ],
+          "scaling": {
+            "fire_damage": 2,
+            "dot_value": 1.5
+          }
+        },
+        {
+          "id": "debilitating_strike",
+          "name": "致残打击",
+          "description": "造成伤害并使目标断筋断骨",
+          "level_requirement": 60,
+          "cost": {
+            "mana": 0,
+            "energy": 30
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 2.0",
+              "element": "physical"
+            },
+            {
+              "type": "debuff",
+              "stat": "movement_speed",
+              "value": -50,
+              "duration": 2
+            },
+            {
+              "type": "debuff",
+              "stat": "attack_power",
+              "value": -25,
+              "duration": 2
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.15,
+            "movement_speed_reduction": -10,
+            "attack_power_reduction": -5
+          },
+          "synergies": [
+            {
+              "condition": "target_has_any_debuff",
+              "bonus": "damage",
+              "value": 20
+            }
+          ]
+        }
+      ],
+      "phase4": [
+        {
+          "id": "shadow_assault",
+          "name": "暗影突击",
+          "description": "快速攻击多个目标，造成高额伤害",
+          "level_requirement": 81,
+          "cost": {
+            "mana": 0,
+            "energy": 40
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 2.5",
+              "element": "shadow",
+              "target": "multiple",
+              "max_targets": 3
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.2,
+            "max_targets": 0.5
+          },
+          "prerequisites": ["stealth", "shadow_strike"]
+        },
+        {
+          "id": "assassins_mark",
+          "name": "刺客标记",
+          "description": "标记目标，增加对其造成的所有伤害",
+          "level_requirement": 85,
+          "cost": {
+            "mana": 0,
+            "energy": 30
+          },
+          "effects": [
+            {
+              "type": "debuff",
+              "stat": "damage_taken",
+              "value": 30,
+              "duration": 5
+            },
+            {
+              "type": "buff",
+              "stat": "critical_chance_vs_marked",
+              "value": 25,
+              "duration": 5
+            }
+          ],
+          "scaling": {
+            "damage_taken_increase": 5,
+            "critical_chance_vs_marked": 5
+          }
+        },
+        {
+          "id": "death_blow",
+          "name": "死亡打击",
+          "description": "对低生命值目标造成致命伤害",
+          "level_requirement": 90,
+          "cost": {
+            "mana": 0,
+            "energy": 45
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "agility * 3.5",
+              "element": "physical"
+            },
+            {
+              "type": "instant_kill",
+              "chance": 10,
+              "condition": "target_health_below_20%"
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.25,
+            "instant_kill_chance": 2
+          },
+          "prerequisites": ["backstab", "critical_mastery"]
+        },
+        {
+          "id": "vanishing_act",
+          "name": "消失",
+          "description": "立即进入潜行状态，并重置所有技能冷却",
+          "level_requirement": 95,
+          "cost": {
+            "mana": 0,
+            "energy": 50
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "stealth",
+              "value": 100,
+              "duration": 2
+            },
+            {
+              "type": "buff",
+              "stat": "all_skill_cd_reset",
+              "value": true
+            }
+          ],
+          "scaling": {
+            "stealth_duration": 0.5
+          },
+          "prerequisites": ["stealth", "shadow_strike"]
+        }
+      ]
+    },
+    "knight": {
+      "phase1": [
+        {
+          "id": "shield_bash",
+          "name": "盾击",
+          "description": "用盾牌攻击目标，造成伤害并击晕",
+          "level_requirement": 1,
+          "cost": {
+            "mana": 0,
+            "stamina": 12
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.3 + endurance * 0.7",
+              "element": "physical"
+            },
+            {
+              "type": "stun",
+              "chance": 22,
+              "duration": 1
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.09,
+            "stun_chance": 3
+          }
+        },
+        {
+          "id": "holy_aura",
+          "name": "神圣光环",
+          "description": "释放神圣光环，增加自身和队友的抗性",
+          "level_requirement": 1,
+          "cost": {
+            "mana": 15
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "all_resistances",
+              "value": 10,
+              "duration": 4,
+              "target": "self_and_allies"
+            }
+          ],
+          "scaling": {
+            "resistances": 2
+          }
+        },
+        {
+          "id": "charge",
+          "name": "冲锋",
+          "description": "快速冲向目标，造成伤害并增加移动速度",
+          "level_requirement": 5,
+          "cost": {
+            "mana": 0,
+            "stamina": 15
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.3",
+              "element": "physical"
+            },
+            {
+              "type": "buff",
+              "stat": "movement_speed",
+              "value": 25,
+              "duration": 2
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "movement_speed": 5
+          }
+        },
+        {
+          "id": "heavy_armor_mastery",
+          "name": "重甲精通",
+          "description": "提高重甲的效果，增加护甲和生命值",
+          "level_requirement": 10,
+          "cost": {
+            "mana": 0,
+            "stamina": 5
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "armor",
+              "value": 20,
+              "duration": 0
+            },
+            {
+              "type": "buff",
+              "stat": "health_max",
+              "value": 40,
+              "duration": 0
+            }
+          ],
+          "scaling": {
+            "armor": 4,
+            "health_max": 8
+          }
+        }
+      ],
+      "phase2": [
+        {
+          "id": "speed_of_light",
+          "name": "光速",
+          "description": "增加移动速度，攻击速度和攻击力",
+          "level_requirement": 21,
+          "cost": {
+            "mana": 25,
+            "stamina": 20
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "movement_speed",
+              "value": 30,
+              "duration": 5
+            },
+            {
+              "type": "buff",
+              "stat": "attack_speed",
+              "value": 20,
+              "duration": 5
+            },
+            {
+              "type": "buff",
+              "stat": "attack_power",
+              "value": "movement_speed * 0.5",
+              "duration": 5
+            }
+          ],
+          "scaling": {
+            "movement_speed": 5,
+            "attack_speed": 4,
+            "attack_power_multiplier": 0.1
+          },
+          "prerequisites": ["charge"]
+        },
+        {
+          "id": "divine_protection",
+          "name": "神圣保护",
+          "description": "获得神圣保护，减少受到的伤害",
+          "level_requirement": 25,
+          "cost": {
+            "mana": 30
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "damage_reduction",
+              "value": 20,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "damage_reduction": 5
+          }
+        },
+        {
+          "id": "retribution",
+          "name": "复仇",
+          "description": "反弹部分受到的伤害",
+          "level_requirement": 30,
+          "cost": {
+            "mana": 20,
+            "stamina": 15
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "damage_reflection",
+              "value": 15,
+              "duration": 4
+            }
+          ],
+          "scaling": {
+            "damage_reflection": 5
+          }
+        },
+        {
+          "id": "knights_valor",
+          "name": "骑士 valor",
+          "description": "增加自身和队友的生命值和生命恢复",
+          "level_requirement": 35,
+          "cost": {
+            "mana": 25
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "health_max",
+              "value": 60,
+              "duration": 5,
+              "target": "self_and_allies"
+            },
+            {
+              "type": "buff",
+              "stat": "health_regen",
+              "value": 3,
+              "duration": 5,
+              "target": "self_and_allies"
+            }
+          ],
+          "scaling": {
+            "health_max": 10,
+            "health_regen": 0.5
+          }
+        }
+      ],
+      "phase3": [
+        {
+          "id": "bleeding_guard",
+          "name": "流血守卫",
+          "description": "攻击时造成流血效果，并有几率使目标缴械",
+          "level_requirement": 46,
+          "cost": {
+            "mana": 0,
+            "stamina": 25
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.6 + endurance * 0.8",
+              "element": "physical"
+            },
+            {
+              "type": "dot",
+              "name": "bleeding",
+              "value": 8,
+              "duration": 5,
+              "stacks": 5
+            },
+            {
+              "type": "debuff",
+              "stat": "disarm",
+              "chance": 10,
+              "duration": 2
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "bleed_damage": 1,
+            "disarm_chance": 2
+          },
+          "synergies": [
+            {
+              "condition": "target_has_bleed",
+              "bonus": "damage_reduction",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "id": "holy_fire",
+          "name": "神圣之火",
+          "description": "释放神圣之火，对目标造成伤害并附带燃烧效果",
+          "level_requirement": 50,
+          "cost": {
+            "mana": 35
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.8",
+              "element": "holy"
+            },
+            {
+              "type": "dot",
+              "name": "holy_burning",
+              "value": 9,
+              "duration": 4,
+              "stacks": 4
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.12,
+            "burn_damage": 1.5
+          }
+        },
+        {
+          "id": "corrosive_shield",
+          "name": "腐蚀之盾",
+          "description": "盾牌附带腐蚀效果，反弹伤害并附带中毒",
+          "level_requirement": 55,
+          "cost": {
+            "mana": 30,
+            "stamina": 20
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "damage_reflection",
+              "value": 20,
+              "duration": 5
+            },
+            {
+              "type": "on_hit_effect",
+              "effect": {
+                "type": "dot",
+                "name": "corrosion",
+                "value": 7,
+                "duration": 4,
+                "stacks": 3
+              }
+            }
+          ],
+          "scaling": {
+            "damage_reflection": 5,
+            "corrosion_damage": 1
+          },
+          "prerequisites": ["retribution"]
+        },
+        {
+          "id": "staggering_blow",
+          "name": "震慑打击",
+          "description": "对目标造成伤害并降低其攻击速度",
+          "level_requirement": 60,
+          "cost": {
+            "mana": 0,
+            "stamina": 30
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 2.0 + endurance * 1.0",
+              "element": "physical"
+            },
+            {
+              "type": "debuff",
+              "stat": "attack_speed",
+              "value": -25,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.15,
+            "attack_speed_reduction": -5
+          }
+        }
+      ],
+      "phase4": [
+        {
+          "id": "knights_wrath",
+          "name": "骑士之怒",
+          "description": "释放骑士之怒，造成高额伤害并增加自身属性",
+          "level_requirement": 81,
+          "cost": {
+            "mana": 50,
+            "stamina": 35
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 3.0 + endurance * 1.5",
+              "element": "holy"
+            },
+            {
+              "type": "buff",
+              "stat": "all_stats",
+              "value": 15,
+              "duration": 4
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.2,
+            "all_stats_bonus": 3
+          },
+          "prerequisites": ["speed_of_light", "holy_fire"]
+        },
+        {
+          "id": "avenging_angel",
+          "name": "复仇天使",
+          "description": "化身为复仇天使，获得强大的力量但消耗生命值",
+          "level_requirement": 85,
+          "cost": {
+            "mana": "all",
+            "health": "max * 0.2"
+          },
+          "effects": [
+            {
+              "type": "buff",
+              "stat": "strength",
+              "value": "base * 2.0",
+              "duration": 3
+            },
+            {
+              "type": "buff",
+              "stat": "attack_speed",
+              "value": 50,
+              "duration": 3
+            },
+            {
+              "type": "buff",
+              "stat": "movement_speed",
+              "value": 40,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "strength_multiplier": 0.3,
+            "attack_speed": 10,
+            "movement_speed": 10
+          }
+        },
+        {
+          "id": "holy_ground",
+          "name": "神圣领域",
+          "description": "创造神圣领域，对敌人造成伤害并提升队友",
+          "level_requirement": 90,
+          "cost": {
+            "mana": 60
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 1.5",
+              "element": "holy",
+              "target": "all_nearby",
+              "duration": 4
+            },
+            {
+              "type": "buff",
+              "stat": "all_stats",
+              "value": 10,
+              "duration": 4,
+              "target": "self_and_allies"
+            },
+            {
+              "type": "buff",
+              "stat": "damage_reduction",
+              "value": 15,
+              "duration": 4,
+              "target": "self_and_allies"
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.1,
+            "all_stats_bonus": 2,
+            "damage_reduction": 3
+          },
+          "prerequisites": ["holy_aura", "divine_protection"]
+        },
+        {
+          "id": "final_judgment",
+          "name": "最终审判",
+          "description": "对目标进行最终审判，造成毁灭性伤害",
+          "level_requirement": 95,
+          "cost": {
+            "mana": 100,
+            "stamina": 50
+          },
+          "effects": [
+            {
+              "type": "damage",
+              "value": "strength * 4.0 + endurance * 2.0",
+              "element": "holy"
+            },
+            {
+              "type": "debuff",
+              "stat": "all_resistances",
+              "value": -30,
+              "duration": 3
+            }
+          ],
+          "scaling": {
+            "damage_multiplier": 0.3,
+            "resistance_reduction": -5
+          },
+          "prerequisites": ["holy_fire", "knights_wrath"]
+        }
+      ]
+    }
+  }
+}

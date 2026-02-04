@@ -1,0 +1,446 @@
+{
+  "enemies": [
+    {
+      "id": "goblin",
+      "name": "哥布林",
+      "level": 1,
+      "health": 40,
+      "damage": {
+        "min": 4,
+        "max": 6
+      },
+      "defense": 1,
+      "attributes": {
+        "strength": 6,
+        "agility": 10,
+        "precision": 8,
+        "vitality": 7,
+        "endurance": 5
+      },
+      "enemy_type": "common",
+      "combat_type": "agile",
+      "experience": 10,
+      "loot_chance": 70,
+      "gold_drop": {
+        "min": 1,
+        "max": 5
+      },
+      "drop_table": {
+        "common": 70,
+        "uncommon": 20,
+        "rare": 7,
+        "epic": 2,
+        "ancient": 1
+      },
+      "preferred_items": ["sword", "axe", "helmet", "potion"]
+    },
+    {
+      "id": "orc",
+      "name": "兽人",
+      "level": 3,
+      "health": 120,
+      "damage": {
+        "min": 10,
+        "max": 15
+      },
+      "defense": 5,
+      "attributes": {
+        "strength": 15,
+        "agility": 8,
+        "precision": 9,
+        "vitality": 12,
+        "endurance": 10
+      },
+      "enemy_type": "elite",
+      "combat_type": "strength",
+      "experience": 30,
+      "loot_chance": 80,
+      "gold_drop": {
+        "min": 3,
+        "max": 15
+      },
+      "drop_table": {
+        "common": 60,
+        "uncommon": 25,
+        "rare": 10,
+        "epic": 4,
+        "ancient": 1
+      },
+      "preferred_items": ["axe", "chest", "gloves", "potion"]
+    },
+    {
+      "id": "dragon",
+      "name": "龙",
+      "level": 10,
+      "health": 1100,
+      "damage": {
+        "min": 50,
+        "max": 80
+      },
+      "defense": 20,
+      "attributes": {
+        "strength": 26,
+        "agility": 16,
+        "precision": 20,
+        "vitality": 30,
+        "endurance": 26
+      },
+      "enemy_type": "boss",
+      "combat_type": "balanced",
+      "experience": 900,
+      "loot_chance": 100,
+      "gold_drop": {
+        "min": 120,
+        "max": 220
+      },
+      "drop_table": {
+        "common": 15,
+        "uncommon": 25,
+        "rare": 25,
+        "epic": 25,
+        "ancient": 10
+      },
+      "preferred_items": ["sword", "staff", "amulet", "potion", "scroll"]
+    },
+    {
+      "id": "skeleton",
+      "name": "骷髅",
+      "level": 2,
+      "health": 60,
+      "damage": {
+        "min": 6,
+        "max": 9
+      },
+      "defense": 2,
+      "attributes": {
+        "strength": 8,
+        "agility": 9,
+        "precision": 10,
+        "vitality": 6,
+        "endurance": 4
+      },
+      "enemy_type": "common",
+      "combat_type": "precision",
+      "experience": 15,
+      "loot_chance": 75,
+      "gold_drop": {
+        "min": 2,
+        "max": 10
+      },
+      "drop_table": {
+        "common": 65,
+        "uncommon": 22,
+        "rare": 8,
+        "epic": 3,
+        "ancient": 2
+      },
+      "preferred_items": ["sword", "helmet", "ring", "potion"]
+    },
+    {
+      "id": "troll",
+      "name": "巨魔",
+      "level": 5,
+      "health": 300,
+      "damage": {
+        "min": 18,
+        "max": 30
+      },
+      "defense": 10,
+      "attributes": {
+        "strength": 22,
+        "agility": 9,
+        "precision": 10,
+        "vitality": 18,
+        "endurance": 16
+      },
+      "enemy_type": "elite",
+      "combat_type": "tank",
+      "experience": 70,
+      "loot_chance": 85,
+      "gold_drop": {
+        "min": 5,
+        "max": 25
+      },
+      "drop_table": {
+        "common": 55,
+        "uncommon": 28,
+        "rare": 12,
+        "epic": 4,
+        "ancient": 1
+      },
+      "preferred_items": ["axe", "chest", "legs", "potion"]
+    },
+    {
+      "id": "spider",
+      "name": "蜘蛛",
+      "level": 2,
+      "health": 50,
+      "damage": {
+        "min": 5,
+        "max": 8
+      },
+      "defense": 1,
+      "attributes": {
+        "strength": 5,
+        "agility": 12,
+        "precision": 11,
+        "vitality": 6,
+        "endurance": 3
+      },
+      "enemy_type": "common",
+      "combat_type": "agile",
+      "experience": 12,
+      "loot_chance": 72,
+      "gold_drop": {
+        "min": 2,
+        "max": 8
+      },
+      "drop_table": {
+        "common": 68,
+        "uncommon": 21,
+        "rare": 8,
+        "epic": 2,
+        "ancient": 1
+      },
+      "preferred_items": ["dagger", "gloves", "boots", "potion"]
+    },
+    {
+      "id": "wizard",
+      "name": "巫师",
+      "level": 4,
+      "health": 110,
+      "damage": {
+        "min": 13,
+        "max": 19
+      },
+      "defense": 4,
+      "attributes": {
+        "strength": 7,
+        "agility": 11,
+        "precision": 18,
+        "vitality": 10,
+        "endurance": 7
+      },
+      "enemy_type": "elite",
+      "combat_type": "precision",
+      "experience": 45,
+      "loot_chance": 82,
+      "gold_drop": {
+        "min": 4,
+        "max": 20
+      },
+      "drop_table": {
+        "common": 58,
+        "uncommon": 26,
+        "rare": 11,
+        "epic": 4,
+        "ancient": 1
+      },
+      "preferred_items": ["staff", "robe", "accessories", "potion", "scroll"]
+    },
+    {
+      "id": "giant",
+      "name": "巨人",
+      "level": 7,
+      "health": 480,
+      "damage": {
+        "min": 24,
+        "max": 42
+      },
+      "defense": 14,
+      "attributes": {
+        "strength": 26,
+        "agility": 7,
+        "precision": 8,
+        "vitality": 22,
+        "endurance": 19
+      },
+      "enemy_type": "elite",
+      "combat_type": "tank",
+      "experience": 120,
+      "loot_chance": 90,
+      "gold_drop": {
+        "min": 7,
+        "max": 35
+      },
+      "drop_table": {
+        "common": 50,
+        "uncommon": 30,
+        "rare": 13,
+        "epic": 5,
+        "ancient": 2
+      },
+      "preferred_items": ["hammer", "heavy_armor", "shield", "potion"]
+    },
+    {
+      "id": "vampire",
+      "name": "吸血鬼",
+      "level": 6,
+      "health": 216,
+      "damage": {
+        "min": 22,
+        "max": 30
+      },
+      "defense": 7,
+      "attributes": {
+        "strength": 17,
+        "agility": 16,
+        "precision": 17,
+        "vitality": 14,
+        "endurance": 11
+      },
+      "enemy_type": "elite",
+      "combat_type": "balanced",
+      "experience": 96,
+      "loot_chance": 88,
+      "gold_drop": {
+        "min": 6,
+        "max": 30
+      },
+      "drop_table": {
+        "common": 45,
+        "uncommon": 32,
+        "rare": 15,
+        "epic": 6,
+        "ancient": 2
+      },
+      "preferred_items": ["sword", "cloak", "necklace", "potion", "scroll"]
+    },
+    {
+      "id": "golem",
+      "name": "魔像",
+      "level": 8,
+      "health": 600,
+      "damage": {
+        "min": 30,
+        "max": 42
+      },
+      "defense": 18,
+      "attributes": {
+        "strength": 23,
+        "agility": 6,
+        "precision": 7,
+        "vitality": 24,
+        "endurance": 22
+      },
+      "enemy_type": "elite",
+      "combat_type": "tank",
+      "experience": 180,
+      "loot_chance": 95,
+      "gold_drop": {
+        "min": 8,
+        "max": 40
+      },
+      "drop_table": {
+        "common": 40,
+        "uncommon": 35,
+        "rare": 16,
+        "epic": 7,
+        "ancient": 2
+      },
+      "preferred_items": ["hammer", "heavy_armor", "shield", "potion"]
+    },
+    {
+      "id": "bandit",
+      "name": "强盗",
+      "level": 1,
+      "health": 45,
+      "damage": {
+        "min": 5,
+        "max": 7
+      },
+      "defense": 1,
+      "attributes": {
+        "strength": 7,
+        "agility": 9,
+        "precision": 8,
+        "vitality": 8,
+        "endurance": 6
+      },
+      "enemy_type": "common",
+      "combat_type": "strength",
+      "experience": 11,
+      "loot_chance": 71,
+      "gold_drop": {
+        "min": 1,
+        "max": 6
+      },
+      "drop_table": {
+        "common": 72,
+        "uncommon": 18,
+        "rare": 7,
+        "epic": 2,
+        "ancient": 1
+      },
+      "preferred_items": ["sword", "leather_armor", "boots", "potion"]
+    },
+    {
+      "id": "wolf",
+      "name": "狼",
+      "level": 1,
+      "health": 35,
+      "damage": {
+        "min": 5,
+        "max": 8
+      },
+      "defense": 1,
+      "attributes": {
+        "strength": 6,
+        "agility": 13,
+        "precision": 10,
+        "vitality": 6,
+        "endurance": 4
+      },
+      "enemy_type": "common",
+      "combat_type": "agile",
+      "experience": 9,
+      "loot_chance": 68,
+      "gold_drop": {
+        "min": 1,
+        "max": 4
+      },
+      "drop_table": {
+        "common": 75,
+        "uncommon": 18,
+        "rare": 6,
+        "epic": 1,
+        "ancient": 0
+      },
+      "preferred_items": ["potion", "consumable"]
+    },
+    {
+      "id": "dungeon_keeper",
+      "name": "地牢守护者",
+      "level": 5,
+      "health": 360,
+      "damage": {
+        "min": 22,
+        "max": 36
+      },
+      "defense": 12,
+      "attributes": {
+        "strength": 25,
+        "agility": 10,
+        "precision": 12,
+        "vitality": 21,
+        "endurance": 18
+      },
+      "enemy_type": "boss",
+      "combat_type": "tank",
+      "experience": 250,
+      "loot_chance": 100,
+      "gold_drop": {
+        "min": 50,
+        "max": 125
+      },
+      "drop_table": {
+        "common": 30,
+        "uncommon": 30,
+        "rare": 20,
+        "epic": 15,
+        "ancient": 5
+      },
+      "preferred_items": ["axe", "heavy_armor", "shield", "potion", "scroll"]
+    }
+  ]
+}

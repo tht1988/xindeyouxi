@@ -1,0 +1,1155 @@
+{
+  "suffixes": [
+    // 防御类 - 生命值
+    {
+      "id": "of_immortality",
+      "name": "不朽之",
+      "level": "t1",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 2000,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_vitality",
+      "name": "活力之",
+      "level": "t2",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 1500,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_stamina",
+      "name": "耐力之",
+      "level": "t3",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 1200,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_endurance",
+      "name": "持久之",
+      "level": "t4",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 900,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_health",
+      "name": "生命之",
+      "level": "t5",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 700,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_vigor",
+      "name": "精力之",
+      "level": "t6",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 500,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_fitness",
+      "name": "健壮之",
+      "level": "t7",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 350,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_sturdiness",
+      "name": "结实之",
+      "level": "t8",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 250,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_healthiness",
+      "name": "健康之",
+      "level": "t9",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "health",
+          "value": 150,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 防御类 - 护甲值
+    {
+      "id": "of_ironclad",
+      "name": "铁甲之",
+      "level": "t1",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 300,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_stone",
+      "name": "石肤之",
+      "level": "t2",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 250,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_solidity",
+      "name": "坚固之",
+      "level": "t3",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 200,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_resilience",
+      "name": "韧性之",
+      "level": "t4",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 160,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_defense",
+      "name": "防御之",
+      "level": "t5",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 120,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_protection",
+      "name": "保护之",
+      "level": "t6",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 90,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_sturdiness",
+      "name": "结实之",
+      "level": "t7",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 70,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_armor",
+      "name": "护甲之",
+      "level": "t8",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 50,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_thickness",
+      "name": "厚实之",
+      "level": "t9",
+      "applicable_types": ["armor"],
+      "effects": [
+        {
+          "stat": "armor",
+          "value": 30,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 防御类 - 抗性（物理）
+    {
+      "id": "of_physical_immunity",
+      "name": "物免之",
+      "level": "t1",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 50,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_physical_protection",
+      "name": "物防之",
+      "level": "t2",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 40,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_physical_warding",
+      "name": "守护之",
+      "level": "t3",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 30,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_physical_resistance",
+      "name": "抗性之",
+      "level": "t4",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 25,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_physical_defense",
+      "name": "御敌之",
+      "level": "t5",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 20,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_physical_guard",
+      "name": "守卫之",
+      "level": "t6",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 15,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_physical_shielding",
+      "name": "护盾之",
+      "level": "t7",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 12,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_physical_toughness",
+      "name": "坚韧之",
+      "level": "t8",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 10,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_physical_resist",
+      "name": "抵抗之",
+      "level": "t9",
+      "applicable_types": ["armor", "accessory"],
+      "effects": [
+        {
+          "stat": "physical_resistance",
+          "value": 8,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 武器类 - 火焰伤害
+    {
+      "id": "of_inferno",
+      "name": "炼狱之",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 150,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_firestorm",
+      "name": "火暴之",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 120,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_blaze",
+      "name": "烈焰之",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 90,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_fire",
+      "name": "火焰之",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 70,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_ember",
+      "name": "余烬之",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 55,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_heat",
+      "name": "灼热之",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 40,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_warmth",
+      "name": "温暖之",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 30,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_heatwave",
+      "name": "热浪之",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 20,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_flicker",
+      "name": "闪烁之",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "fire_damage",
+          "value": 10,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 武器类 - 冰冻伤害
+    {
+      "id": "of_absolute_zero",
+      "name": "绝对之",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 150,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_blizzard",
+      "name": "暴雪之",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 120,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_ice",
+      "name": "寒冰之",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 90,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_frost",
+      "name": "霜冻之",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 70,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_glacier",
+      "name": "冰川之",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 55,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_chill",
+      "name": "寒冷之",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 40,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_frostbite",
+      "name": "冻伤之",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 30,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_cold",
+      "name": "冰冷之",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 20,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_snow",
+      "name": "白雪之",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "cold_damage",
+          "value": 10,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 武器类 - 闪电伤害
+    {
+      "id": "of_thunderstorm",
+      "name": "雷暴之",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 150,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_lightning",
+      "name": "闪电之",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 120,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_thunder",
+      "name": "雷霆之",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 90,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_shock",
+      "name": "电击之",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 70,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_voltage",
+      "name": "电压之",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 55,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_spark",
+      "name": "火花之",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 40,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_static",
+      "name": "静电之",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 30,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_charge",
+      "name": "电荷之",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 20,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_electricity",
+      "name": "电流之",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "lightning_damage",
+          "value": 10,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 武器类 - 毒素伤害
+    {
+      "id": "of_poison_kingdom",
+      "name": "毒域之",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 150,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_noxious_fumes",
+      "name": "毒雾之",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 120,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_venom",
+      "name": "毒液之",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 90,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_poison",
+      "name": "毒素之",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 70,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_toxin",
+      "name": "毒物之",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 55,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_contagion",
+      "name": "传染之",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 40,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_venomous",
+      "name": "有毒之",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 30,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_poisoned",
+      "name": "中毒之",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 20,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_toxic",
+      "name": "毒性之",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "poison_damage",
+          "value": 10,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 武器类 - 百分比增伤
+    {
+      "id": "of_perfect_damage",
+      "name": "完美之",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 50,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_great_damage",
+      "name": "巨力之",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 40,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_major_damage",
+      "name": "大量之",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 30,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_enhanced_damage",
+      "name": "增强之",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 25,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_increased_damage",
+      "name": "增加之",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 20,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_damage_boost",
+      "name": "提升之",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 15,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_bonus_damage",
+      "name": "额外之",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 12,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_minor_damage",
+      "name": "小幅之",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 10,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_small_damage",
+      "name": "微小之",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 8,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 武器类 - 元素穿透
+    {
+      "id": "of_elemental_annihilation",
+      "name": "湮灭之",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 50,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "of_elemental_ignorance",
+      "name": "无视之",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 40,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "of_elemental_piercing",
+      "name": "穿透之",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 30,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_elemental_shredding",
+      "name": "撕裂之",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 25,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "of_elemental_breakthrough",
+      "name": "突破之",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 20,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_elemental_weakening",
+      "name": "削弱之",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 15,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "of_elemental_cutting",
+      "name": "切割之",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 12,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_elemental_penetration",
+      "name": "穿甲之",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 10,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "of_elemental_pierce",
+      "name": "刺穿之",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "elemental_penetration",
+          "value": 8,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+  "potions": [
+    /* 生命恢复类 */
+    {
+      "id": "small_health_potion",
+      "name": "小型生命药水",
+      "type": "potion",
+      "category": "health",
+      "effect": {
+        "type": "instant",
+        "health": 50
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 20
+    },
+    {
+      "id": "medium_health_potion",
+      "name": "中型生命药水",
+      "type": "potion",
+      "category": "health",
+      "effect": {
+        "type": "instant",
+        "health": 100
+      },
+      "rarity": "common",
+      "level_requirement": 5,
+      "max_stack": 20
+    },
+    {
+      "id": "large_health_potion",
+      "name": "大型生命药水",
+      "type": "potion",
+      "category": "health",
+      "effect": {
+        "type": "instant",
+        "health": 200
+      },
+      "rarity": "uncommon",
+      "level_requirement": 10,
+      "max_stack": 20
+    },
+    {
+      "id": "healing_potion",
+      "name": "治疗药水",
+      "type": "potion",
+      "category": "health",
+      "effect": {
+        "type": "over_time",
+        "health": 25,
+        "duration": 8,
+        "interval": 1
+      },
+      "rarity": "common",
+      "level_requirement": 3,
+      "max_stack": 20
+    },
+    
+    /* 魔法恢复类 */
+    {
+      "id": "small_mana_potion",
+      "name": "小型魔法药水",
+      "type": "potion",
+      "category": "mana",
+      "effect": {
+        "type": "instant",
+        "mana": 30
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 20
+    },
+    {
+      "id": "medium_mana_potion",
+      "name": "中型魔法药水",
+      "type": "potion",
+      "category": "mana",
+      "effect": {
+        "type": "instant",
+        "mana": 60
+      },
+      "rarity": "common",
+      "level_requirement": 5,
+      "max_stack": 20
+    },
+    {
+      "id": "large_mana_potion",
+      "name": "大型魔法药水",
+      "type": "potion",
+      "category": "mana",
+      "effect": {
+        "type": "instant",
+        "mana": 120
+      },
+      "rarity": "uncommon",
+      "level_requirement": 10,
+      "max_stack": 20
+    },
+    {
+      "id": "mana_regen_potion",
+      "name": "魔法再生药水",
+      "type": "potion",
+      "category": "mana",
+      "effect": {
+        "type": "over_time",
+        "mana": 15,
+        "duration": 8,
+        "interval": 1
+      },
+      "rarity": "common",
+      "level_requirement": 3,
+      "max_stack": 20
+    },
+    
+    /* 体力恢复类 */
+    {
+      "id": "stamina_potion",
+      "name": "体力药水",
+      "type": "potion",
+      "category": "stamina",
+      "effect": {
+        "type": "instant",
+        "stamina": 50
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 20
+    },
+    
+    /* 属性增强类 */
+    {
+      "id": "strength_potion",
+      "name": "力量药水",
+      "type": "potion",
+      "category": "buff",
+      "effect": {
+        "type": "buff",
+        "stats": {
+          "strength": 10
+        },
+        "duration": 30
+      },
+      "rarity": "common",
+      "level_requirement": 5,
+      "max_stack": 10
+    },
+    {
+      "id": "agility_potion",
+      "name": "敏捷药水",
+      "type": "potion",
+      "category": "buff",
+      "effect": {
+        "type": "buff",
+        "stats": {
+          "agility": 10
+        },
+        "duration": 30
+      },
+      "rarity": "common",
+      "level_requirement": 5,
+      "max_stack": 10
+    },
+    {
+      "id": "intelligence_potion",
+      "name": "智力药水",
+      "type": "potion",
+      "category": "buff",
+      "effect": {
+        "type": "buff",
+        "stats": {
+          "intelligence": 10
+        },
+        "duration": 30
+      },
+      "rarity": "common",
+      "level_requirement": 5,
+      "max_stack": 10
+    },
+    
+    /* 防御增强类 */
+    {
+      "id": "defense_potion",
+      "name": "防御药水",
+      "type": "potion",
+      "category": "buff",
+      "effect": {
+        "type": "buff",
+        "stats": {
+          "defense": 15
+        },
+        "duration": 30
+      },
+      "rarity": "common",
+      "level_requirement": 5,
+      "max_stack": 10
+    },
+    {
+      "id": "magic_resistance_potion",
+      "name": "魔法抗性药水",
+      "type": "potion",
+      "category": "buff",
+      "effect": {
+        "type": "buff",
+        "stats": {
+          "magic_resistance": 20
+        },
+        "duration": 30
+      },
+      "rarity": "uncommon",
+      "level_requirement": 8,
+      "max_stack": 10
+    },
+    
+    /* 综合增强类 */
+    {
+      "id": "hero_potion",
+      "name": "英雄药水",
+      "type": "potion",
+      "category": "buff",
+      "effect": {
+        "type": "buff",
+        "stats": {
+          "strength": 5,
+          "agility": 5,
+          "intelligence": 5,
+          "defense": 10
+        },
+        "duration": 60
+      },
+      "rarity": "rare",
+      "level_requirement": 15,
+      "max_stack": 5
+    },
+    
+    /* 特殊效果类 */
+    {
+      "id": "antidote_potion",
+      "name": "解毒药水",
+      "type": "potion",
+      "category": "cure",
+      "effect": {
+        "type": "cure",
+        "status": ["poisoned"]
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 15
+    },
+    {
+      "id": "antivenom_potion",
+      "name": "抗毒血清",
+      "type": "potion",
+      "category": "cure",
+      "effect": {
+        "type": "cure",
+        "status": ["poisoned", "venomous"]
+      },
+      "rarity": "uncommon",
+      "level_requirement": 8,
+      "max_stack": 10
+    }
+  ]
+}

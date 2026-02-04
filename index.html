@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG游戏UI</title>
+    <link rel="stylesheet" href="rpg_ui.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 职业选择界面 -->
+    <div id="class-selection" style="display: flex;">
+        <div class="selection-overlay"></div>
+        <div class="selection-content">
+            <div class="selection-header">
+                <h2>选择你的职业</h2>
+                <p>每个职业都有独特的属性和技能，选择适合你的战斗风格</p>
+            </div>
+            <div class="classes-grid" id="classes-grid">
+                <!-- 职业选项将通过JS生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏容器 -->
+    <div id="game-container" style="display: none;">
+        
+        <!-- 顶部状态栏 -->
+        <div id="top-status">
+            <div class="status-left">
+                <div class="player-name">冒险者</div>
+                <div class="player-level">等级 1</div>
+            </div>
+            <div class="status-center">
+                <div class="health-bar-container">
+                    <div class="health-bar">
+                        <div class="health-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="health-text">100/100</div>
+                </div>
+                <div class="mana-bar-container">
+                    <div class="mana-bar">
+                        <div class="mana-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="mana-text">50/50</div>
+                </div>
+            </div>
+            <div class="status-right">
+                <div class="gold">金币: 100</div>
+                <div class="experience">经验: 0/100</div>
+            </div>
+        </div>
+        
+        <!-- 主界面 -->
+        <div id="main-interface">
+            
+            <!-- 左侧边栏 -->
+            <div id="left-sidebar">
+                <div class="sidebar-tabs">
+                    <button class="tab-btn active" data-tab="character">角色</button>
+                    <button class="tab-btn" data-tab="inventory">背包</button>
+                    <button class="tab-btn" data-tab="skills">技能</button>
+                    <button class="tab-btn" data-tab="quests">任务</button>
+                </div>
+                
+                <!-- 角色面板 -->
+                <div class="tab-content active" id="character-panel">
+                    <div class="character-info">
+                        <div class="character-portrait">
+                            <div class="portrait-frame">
+                                <div class="portrait-image"></div>
+                            </div>
+                        </div>
+                        <div class="character-attributes">
+                            <h3>属性</h3>
+                            <div class="attribute">
+                                <span>力量: </span>
+                                <span class="attribute-value">10</span>
+                            </div>
+                            <div class="attribute">
+                                <span>敏捷: </span>
+                                <span class="attribute-value">10</span>
+                            </div>
+                            <div class="attribute">
+                                <span>智力: </span>
+                                <span class="attribute-value">10</span>
+                            </div>
+                            <div class="attribute">
+                                <span>体力: </span>
+                                <span class="attribute-value">10</span>
+                            </div>
+                            <div class="attribute">
+                                <span>耐力: </span>
+                                <span class="attribute-value">10</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="equipment-section">
+                        <h3>装备</h3>
+                        <div class="equipment-slots">
+                            <div class="equipment-slot" data-slot="weapon">
+                                <div class="slot-label">武器</div>
+                                <div class="slot-content empty">空</div>
+                            </div>
+                            <div class="equipment-slot" data-slot="head">
+                                <div class="slot-label">头盔</div>
+                                <div class="slot-content empty">空</div>
+                            </div>
+                            <div class="equipment-slot" data-slot="chest">
+                                <div class="slot-label">胸甲</div>
+                                <div class="slot-content empty">空</div>
+                            </div>
+                            <div class="equipment-slot" data-slot="legs">
+                                <div class="slot-label">裤子</div>
+                                <div class="slot-content empty">空</div>
+                            </div>
+                            <div class="equipment-slot" data-slot="feet">
+                                <div class="slot-label">靴子</div>
+                                <div class="slot-content empty">空</div>
+                            </div>
+                            <div class="equipment-slot" data-slot="ring">
+                                <div class="slot-label">戒指</div>
+                                <div class="slot-content empty">空</div>
+                            </div>
+                            <div class="equipment-slot" data-slot="amulet">
+                                <div class="slot-label">项链</div>
+                                <div class="slot-content empty">空</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 背包面板 -->
+                <div class="tab-content" id="inventory-panel">
+                    <div class="inventory-header">
+                        <h3>背包</h3>
+                        <div class="inventory-info">
+                            <span>容量: 0/50</span>
+                        </div>
+                    </div>
+                    <div class="inventory-grid">
+                        <!-- 背包格子将通过JS生成 -->
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                        <div class="inventory-slot"></div>
+                    </div>
+                    <div class="inventory-actions">
+                        <button class="action-btn">使用</button>
+                        <button class="action-btn">装备</button>
+                        <button class="action-btn">丢弃</button>
+                    </div>
+                </div>
+                
+                <!-- 技能面板 -->
+                <div class="tab-content" id="skills-panel">
+                    <div class="skills-header">
+                        <h3>技能</h3>
+                        <div class="skill-points">
+                            <span>可用技能点: </span>
+                            <span class="skill-points-value">3</span>
+                        </div>
+                    </div>
+                    <div class="skill-categories">
+                        <button class="category-btn active" data-category="combat">战斗</button>
+                        <button class="category-btn" data-category="magic">魔法</button>
+                        <button class="category-btn" data-category="utility">通用</button>
+                    </div>
+                    <div class="skills-list">
+                        <!-- 技能将通过JS生成 -->
+                        <div class="skill-item">
+                            <div class="skill-icon"></div>
+                            <div class="skill-info">
+                                <div class="skill-name">猛击</div>
+                                <div class="skill-description">对敌人造成强力打击</div>
+                                <div class="skill-level">等级: 1/5</div>
+                            </div>
+                            <button class="upgrade-btn">升级</button>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"></div>
+                            <div class="skill-info">
+                                <div class="skill-name">火球术</div>
+                                <div class="skill-description">释放火球攻击敌人</div>
+                                <div class="skill-level">等级: 1/5</div>
+                            </div>
+                            <button class="upgrade-btn">升级</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 任务面板 -->
+                <div class="tab-content" id="quests-panel">
+                    <h3>任务</h3>
+                    <div class="quest-list">
+                        <div class="quest-item active">
+                            <div class="quest-title">新手任务</div>
+                            <div class="quest-description">击败5个哥布林</div>
+                            <div class="quest-progress">进度: 0/5</div>
+                        </div>
+                        <div class="quest-item">
+                            <div class="quest-title">收集资源</div>
+                            <div class="quest-description">收集10个木材</div>
+                            <div class="quest-progress">进度: 3/10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中央游戏区域 -->
+            <div id="game-area">
+                <!-- 地图和场景 -->
+                <div id="map-container">
+                    <div class="map">
+                        <!-- 地图元素将通过JS生成 -->
+                        <div class="map-background"></div>
+                        <div class="map-objects">
+                            <div class="map-object tree"></div>
+                            <div class="map-object rock"></div>
+                            <div class="map-object chest"></div>
+                            <div class="map-object portal"></div>
+                        </div>
+                        <div class="player-sprite">
+                            <div class="sprite-body"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 场景信息 -->
+                    <div class="scene-info">
+                        <div class="scene-name">新手村</div>
+                        <div class="scene-description">这是一个宁静的新手村</div>
+                    </div>
+                </div>
+                
+                <!-- 战斗界面 -->
+                <div id="combat-interface" style="display: none;">
+                    <div class="combat-arena">
+                        <div class="combatant player">
+                            <div class="combatant-portrait">
+                                <div class="portrait-frame">
+                                    <div class="portrait-image"></div>
+                                </div>
+                            </div>
+                            <div class="combatant-stats">
+                                <div class="health-bar-small">
+                                    <div class="health-fill-small" style="width: 100%"></div>
+                                </div>
+                                <div class="health-text-small">100/100</div>
+                            </div>
+                        </div>
+                        
+                        <div class="combatant enemy">
+                            <div class="combatant-portrait">
+                                <div class="portrait-frame">
+                                    <div class="portrait-image enemy-image"></div>
+                                </div>
+                            </div>
+                            <div class="combatant-stats">
+                                <div class="health-bar-small">
+                                    <div class="health-fill-small enemy-health" style="width: 80%"></div>
+                                </div>
+                                <div class="health-text-small">80/100</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="combat-actions">
+                        <button class="combat-btn attack">普通攻击</button>
+                        <button class="combat-btn skill">技能</button>
+                        <button class="combat-btn item">物品</button>
+                        <button class="combat-btn flee">逃跑</button>
+                    </div>
+                    
+                    <div class="combat-log">
+                        <div class="log-entry">战斗开始！</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧边栏 -->
+            <div id="right-sidebar">
+                <div class="sidebar-section">
+                    <h3>当前目标</h3>
+                    <div class="current-objective">
+                        <p>探索周围环境</p>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>附近敌人</h3>
+                    <div class="enemy-list">
+                        <div class="enemy-item">
+                            <div class="enemy-icon"></div>
+                            <div class="enemy-info-small">
+                                <div class="enemy-name-small">哥布林</div>
+                                <div class="enemy-level-small">等级 1</div>
+                            </div>
+                        </div>
+                        <div class="enemy-item">
+                            <div class="enemy-icon"></div>
+                            <div class="enemy-info-small">
+                                <div class="enemy-name-small">史莱姆</div>
+                                <div class="enemy-level-small">等级 1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>快捷物品</h3>
+                    <div class="quick-items">
+                        <div class="quick-item-slot"></div>
+                        <div class="quick-item-slot"></div>
+                        <div class="quick-item-slot"></div>
+                        <div class="quick-item-slot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部栏 -->
+        <div id="bottom-bar">
+            <div class="control-info">
+                <span>移动: WASD 或 方向键</span>
+                <span>攻击: 左键</span>
+                <span>交互: E</span>
+                <span>菜单: ESC</span>
+            </div>
+            
+            <button id="menu-btn" class="menu-toggle">菜单</button>
+        </div>
+    </div>
+    
+    <!-- 菜单系统 -->
+    <div id="game-menu" style="display: none;">
+        <div class="menu-overlay"></div>
+        <div class="menu-content">
+            <div class="menu-header">
+                <h2>游戏菜单</h2>
+                <button class="menu-close">×</button>
+            </div>
+            <div class="menu-options">
+                <button class="menu-option">继续游戏</button>
+                <button class="menu-option">保存游戏</button>
+                <button class="menu-option">读取游戏</button>
+                <button class="menu-option">设置</button>
+                <button class="menu-option">退出游戏</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 物品详情弹窗 -->
+    <div id="item-details" style="display: none;">
+        <div class="details-overlay"></div>
+        <div class="details-content">
+            <div class="details-header">
+                <h3>物品详情</h3>
+                <button class="details-close">×</button>
+            </div>
+            <div class="item-details-content">
+                <div class="item-icon-large"></div>
+                <div class="item-info-large">
+                    <div class="item-name-large">生锈的剑</div>
+                    <div class="item-rarity">普通</div>
+                    <div class="item-description">一把生锈的剑，威力不大。</div>
+                    <div class="item-stats">
+                        <div>攻击力: +5</div>
+                        <div>耐久度: 20/20</div>
+                    </div>
+                </div>
+            </div>
+            <div class="details-actions">
+                <button class="action-btn">使用</button>
+                <button class="action-btn">装备</button>
+                <button class="action-btn">丢弃</button>
+            </div>
+        </div>
+    </div>
+
+<script src="classes.js"></script>
+<script src="game.js"></script>
+<script src="rpg_ui.js"></script>
+</body>
+</html>

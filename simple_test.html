@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单游戏流程测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #4CAF50;
+            background-color: #e8f5e8;
+        }
+        .test-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-button:hover {
+            background-color: #45a049;
+        }
+        .log-container {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #222;
+            color: white;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        .log-entry {
+            margin: 5px 0;
+        }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+        .warning { color: #ff9800; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>简单游戏流程测试</h1>
+        
+        <div class="test-section">
+            <h2>游戏状态</h2>
+            <div id="game-status">
+                <p>当前玩家等级: <span id="player-level">1</span></p>
+                <p>当前关卡: <span id="current-level">null</span></p>
+                <p>新手引导完成: <span id="tutorial-completed">false</span></p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>测试功能</h2>
+            <button class="test-button" onclick="testGuideNodes()">测试新手引导节点</button>
+            <button class="test-button" onclick="testGuideProgress()">测试引导进度</button>
+            <button class="test-button" onclick="testLevelLoading()">测试关卡加载</button>
+            <button class="test-button" onclick="testVictoryConditions()">测试胜利条件</button>
+            <button class="test-button" onclick="testDefeatConditions()">测试失败条件</button>
+            <button class="test-button" onclick="testCompleteLevel()">测试完成关卡</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>测试日志</h2>
+            <div class="log-container" id="test-log"></div>
+        </div>
+    </div>
+    
+    <script>
+        // 重写addToLog函数以在页面上显示日志
+        function addToLog(message) {
+            const logContainer = document.getElementById('test-log');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        // 模拟DOM元素
+        const mockDOM = {
+            statusText: { textContent: '' },
+            loadingIndicator: { style: { display: '' } },
+            logContent: { appendChild: () => {} },
+            saveGameBtn: null,
+            loadGameBtn: null,
+            exportSaveBtn: null,
+            importSaveBtn: null,
+            generateEnemyBtn: null,
+            startEncounterBtn: null,
+            attackBtn: null,
+            skillBtn: null,
+            fleeBtn: null,
+            openImprintBtn: null,
+            openEnchantBtn: null,
+            openDisassembleBtn: null,
+            openEnhanceBtn: null,
+            openInscriptionBtn: null,
+            enchantButton: null,
+            enhanceButton: null,
+            combineButton: null,
+            combatArena: { style: { display: '', classList: { add: () => {}, remove: () => {} } } },
+            enemyName: { textContent: '' },
+            enemyCombatantName: { textContent: '' },
+            enemyHealthFill: { style: { width: '' } },
+            enemyHealthText: { textContent: '' },
+            playerHealth: { textContent: '' },
+            playerMana: { textContent: '' },
+            lootList: { innerHTML: '', appendChild: () => {} },
+            classSelection: { style: { display: '' } },
+            enemyGroup: { innerHTML: '' },
+            enemyEncounter: { style: { display: '' } },
+            attributes: {},
+            availablePoints: { textContent: '' },
+            equipmentSlots: {}
+        };
+        
+        // 模拟document对象
+        const originalDocument = window.document;
+        window.document = {
+            ...originalDocument,
+            getElementById: (id) => mockDOM[id] || null,
+            querySelector: (selector) => null,
+            querySelectorAll: () => [],
+            createElement: () => ({
+                style: {},
+                className: '',
+                textContent: '',
+                innerHTML: '',
+                appendChild: () => {},
+                remove: () => {},
+                addEventListener: () => {},
+                removeEventListener: () => {}
+            })
+        };
+    </script>
+    
+    <!-- 加载游戏逻辑 -->
+    <script src="game_logic.js"></script>
+    
+    <script>
+        // 测试函数
+        function updateGameStatus() {
+            document.getElementById('player-level').textContent = player.level;
+            document.getElementById('current-level').textContent = player.level_progress ? player.level_progress.current_level : 'null';
+            document.getElementById('tutorial-completed').textContent = player.guide_progress.tutorial_completed;
+        }
+        
+        function testGuideNodes() {
+            addToLog('开始测试新手引导节点...');
+            loadGameConfigs();
+            
+            if (newbieGuideConfig && newbieGuideConfig.progress_nodes) {
+                addToLog(`✅ 共找到 ${newbieGuideConfig.progress_nodes.length} 个引导节点`);
+                newbieGuideConfig.progress_nodes.forEach((node, index) => {
+                    addToLog(`   ${index + 1}. ${node.name} (${node.id}) - ${node.description}`);
+                });
+            } else {
+                addToLog('❌ 未找到新手引导配置');
+            }
+        }
+        
+        function testGuideProgress() {
+            addToLog('开始测试引导进度...');
+            
+            updateMovementUsedFlag();
+            updateSkillUsedFlag();
+            
+            addToLog(`✅ 引导进度更新成功`);
+            addToLog(`   移动使用: ${player.guide_progress.flags.movement_used}`);
+            addToLog(`   技能使用: ${player.guide_progress.flags.skill_used}`);
+            
+            updateGameStatus();
+        }
+        
+        function testLevelLoading() {
+            addToLog('开始测试关卡加载...');
+            loadGameConfigs();
+            
+            if (levelsConfig && levelsConfig.levels) {
+                addToLog(`✅ 共加载 ${levelsConfig.levels.length} 个关卡`);
+                levelsConfig.levels.forEach((level, index) => {
+                    addToLog(`   ${index + 1}. ${level.name} (${level.id}) - 需求等级: ${level.required_level}`);
+                });
+                
+                const availableLevels = getAvailableLevels();
+                addToLog(`✅ 当前等级可挑战 ${availableLevels.length} 个关卡`);
+                
+                const currentLevel = getCurrentLevel();
+                if (currentLevel) {
+                    addToLog(`✅ 当前推荐关卡: ${currentLevel.name} (${currentLevel.id})`);
+                    document.getElementById('current-level').textContent = currentLevel.id;
+                }
+            } else {
+                addToLog('❌ 未找到关卡配置');
+            }
+        }
+        
+        function testVictoryConditions() {
+            addToLog('开始测试胜利条件...');
+            loadGameConfigs();
+            
+            const level1Victory = checkLevelVictory('level_1');
+            const level2Victory = checkLevelVictory('level_2');
+            const level3Victory = checkLevelVictory('level_3');
+            
+            addToLog(`✅ 关卡1胜利条件: ${level1Victory}`);
+            addToLog(`✅ 关卡2胜利条件: ${level2Victory}`);
+            addToLog(`✅ 关卡3胜利条件: ${level3Victory}`);
+        }
+        
+        function testDefeatConditions() {
+            addToLog('开始测试失败条件...');
+            loadGameConfigs();
+            
+            // 测试玩家死亡条件
+            const originalHealth = player.health;
+            player.health = 0;
+            const playerDeathDefeat = checkLevelDefeat('level_1');
+            addToLog(`✅ 玩家死亡失败条件: ${playerDeathDefeat}`);
+            
+            // 恢复玩家状态
+            player.health = originalHealth;
+            
+            // 测试时间限制条件
+            const timeLimitDefeat = checkLevelDefeat('level_2');
+            addToLog(`✅ 时间限制失败条件: ${timeLimitDefeat}`);
+        }
+        
+        function testCompleteLevel() {
+            addToLog('开始测试完成关卡...');
+            loadGameConfigs();
+            
+            // 初始化玩家进度
+            if (!player.level_progress) {
+                player.level_progress = {
+                    completed_levels: [],
+                    current_level: null
+                };
+            }
+            
+            // 完成关卡1
+            completeLevel('level_1');
+            addToLog(`✅ 完成关卡1成功`);
+            addToLog(`   已完成关卡: ${player.level_progress.completed_levels}`);
+            addToLog(`   当前关卡: ${player.level_progress.current_level}`);
+            
+            updateGameStatus();
+        }
+        
+        // 初始化测试
+        addToLog('测试页面加载完成');
+        addToLog('点击上面的按钮开始测试不同功能');
+    </script>
+</body>
+</html>

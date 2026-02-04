@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>战斗机制测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .test-passed {
+            color: green;
+        }
+        .test-failed {
+            color: red;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>战斗机制测试</h1>
+    
+    <div class="test-section">
+        <h2>1. 暴击、闪避、命中、穿透测试</h2>
+        <button onclick="runCombatTests()">运行战斗测试</button>
+        <div id="combat-test-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. 属性伤害效果测试</h2>
+        <button onclick="runStatusEffectTests()">运行属性效果测试</button>
+        <div id="status-effect-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. 防御边际效益递减测试</h2>
+        <button onclick="runDefenseDiminishingTest()">运行防御递减测试</button>
+        <div id="defense-test-results"></div>
+    </div>
+    
+    <script>
+        // 计算属性伤害的持续效果
+        function calculateStatusEffects(damageType, baseDamage, target) {
+            const statusEffects = [];
+            const chance = Math.random() * 100;
+            
+            switch (damageType) {
+                case 'fire':
+                    // 火焰伤害：持续燃烧效果
+                    if (chance <= 30) { // 30%几率触发
+                        statusEffects.push({
+                            type: 'burn',
+                            name: '燃烧',
+                            duration: 3,
+                            tickDamage: Math.floor(baseDamage * 0.1),
+                            description: '每回合受到火焰伤害'
+                        });
+                    }
+                    break;
+                case 'ice':
+                    // 冰冻伤害：减速效果
+                    if (chance <= 25) { // 25%几率触发
+                        statusEffects.push({
+                            type: 'freeze',
+                            name: '冰冻',
+                            duration: 2,
+                            slowAmount: 30,
+                            description: '攻击速度和移动速度降低'
+                        });
+                    }
+                    break;
+                case 'poison':
+                    // 毒伤：持续中毒效果
+                    if (chance <= 40) { // 40%几率触发
+                        statusEffects.push({
+                            type: 'poison',
+                            name: '中毒',
+                            duration: 4,
+                            tickDamage: Math.floor(baseDamage * 0.15),
+                            description: '每回合受到毒素伤害'
+                        });
+                    }
+                    break;
+                case 'lightning':
+                    // 闪电伤害：感电效果
+                    if (chance <= 20) { // 20%几率触发
+                        statusEffects.push({
+                            type: 'electrify',
+                            name: '感电',
+                            duration: 2,
+                            damageMultiplier: 1.2,
+                            description: '受到的伤害增加'
+                        });
+                    }
+                    break;
+                case 'electric':
+                    // 感电伤害：感电效果强化
+                    if (chance <= 25) { // 25%几率触发
+                        statusEffects.push({
+                            type: 'electrify',
+                            name: '强感电',
+                            duration: 3,
+                            damageMultiplier: 1.3,
+                            description: '受到的伤害显著增加'
+                        });
+                    }
+                    break;
+                case 'paralysis':
+                    // 麻痹伤害：麻痹效果
+                    if (chance <= 15) { // 15%几率触发
+                        statusEffects.push({
+                            type: 'paralysis',
+                            name: '麻痹',
+                            duration: 1,
+                            stunChance: 50,
+                            description: '有几率无法行动'
+                        });
+                    }
+                    break;
+            }
+            
+            return statusEffects;
+        }
+        
+        // 计算伤害（包含完整的战斗机制）
+        function calculateDamage(attackParams) {
+            const {
+                attacker = {},
+                defender = {},
+                baseDamage,
+                damageType = 'physical',
+                source = 'attack'
+            } = attackParams;
+            
+            // 1. 命中判定
+            const hitRate = attacker.hitRate || 95;
+            if (Math.random() * 100 > hitRate) {
+                return { damage: 0, isHit: false, isCrit: false, message: '攻击未命中！' };
+            }
+            
+            // 2. 闪避判定
+            const dodgeRate = defender.dodgeRate || 0;
+            if (Math.random() * 100 <= dodgeRate) {
+                return { damage: 0, isHit: true, isDodged: true, isCrit: false, message: '攻击被闪避！' };
+            }
+            
+            // 3. 暴击判定
+            const critChance = attacker.critChance || 5;
+            const isCrit = Math.random() * 100 <= critChance;
+            const critDamage = attacker.critDamage || 150;
+            const critMultiplier = isCrit ? (critDamage / 100) : 1;
+            
+            // 4. 获取目标抗性
+            const defaultResistances = {
+                physical: 0,
+                fire: 0,
+                ice: 0,
+                lightning: 0,
+                poison: 0,
+                electric: 0,
+                paralysis: 0
+            };
+            const targetResistances = defender.resistances || {};
+            const resistances = { ...defaultResistances, ...targetResistances };
+            const resistance = Math.min(resistances[damageType] || 0, 75); // 抗性上限75%
+            
+            // 5. 获取目标防御和穿透率
+            let defense = defender.defense || 0;
+            const penetrationRate = attacker.penetrationRate || 0;
+            
+            // 6. 应用穿透效果
+            const effectiveDefense = defense * (1 - penetrationRate / 100);
+            
+            // 7. 防御减免：物理伤害全额减免，属性伤害减半减免
+            const defenseReductionFactor = damageType === 'physical' ? 1 : 0.5;
+            const defenseReduction = effectiveDefense * defenseReductionFactor;
+            
+            // 8. 计算抗性减免后的伤害
+            let resistanceReducedDamage = baseDamage * (1 - resistance / 100);
+            
+            // 9. 应用暴击倍率
+            let finalDamage = resistanceReducedDamage * critMultiplier;
+            
+            // 10. 应用防御减免
+            finalDamage = Math.max(1, finalDamage - defenseReduction);
+            
+            // 11. 计算属性伤害的持续效果（如果有）
+            const statusEffects = calculateStatusEffects(damageType, baseDamage, defender);
+            
+            return {
+                damage: Math.floor(finalDamage),
+                isHit: true,
+                isDodged: false,
+                isCrit: isCrit,
+                critMultiplier: critMultiplier,
+                resistance: resistance,
+                penetration: penetrationRate,
+                defenseReduction: defenseReduction,
+                statusEffects: statusEffects,
+                message: isCrit ? '暴击！' : '命中！'
+            };
+        }
+        
+        // 防御边际效益递减测试
+        function calculateDefenseDiminishing(defense) {
+            return defense / (1 + defense / 1000);
+        }
+        
+        // 运行战斗测试
+        function runCombatTests() {
+            const resultsDiv = document.getElementById('combat-test-results');
+            resultsDiv.innerHTML = '<h3>测试结果：</h3>';
+            
+            // 测试用的攻击者
+            const testAttacker = {
+                hitRate: 95,
+                critChance: 20,
+                critDamage: 200,
+                penetrationRate: 10
+            };
+            
+            // 测试用的防御者
+            const testDefender = {
+                dodgeRate: 10,
+                defense: 400,
+                resistances: {
+                    physical: 50,
+                    fire: 30
+                }
+            };
+            
+            // 运行10次测试
+            for (let i = 0; i < 10; i++) {
+                const result = calculateDamage({
+                    attacker: testAttacker,
+                    defender: testDefender,
+                    baseDamage: 1000,
+                    damageType: 'physical'
+                });
+                
+                resultsDiv.innerHTML += `
+                    <div class="test-result">
+                        <strong>测试 ${i + 1}：</strong> ${result.message} 伤害：${result.damage}，暴击：${result.isCrit}，闪避：${result.isDodged}
+                        <br>抗性：${result.resistance}%，穿透：${result.penetration}%，防御减免：${result.defenseReduction}
+                        ${result.statusEffects.length > 0 ? `<br>状态效果：${result.statusEffects.map(e => e.name).join(', ')}` : ''}
+                    </div>
+                `;
+            }
+        }
+        
+        // 运行属性效果测试
+        function runStatusEffectTests() {
+            const resultsDiv = document.getElementById('status-effect-results');
+            resultsDiv.innerHTML = '<h3>属性效果测试结果：</h3>';
+            
+            const damageTypes = ['fire', 'ice', 'poison', 'lightning', 'electric', 'paralysis'];
+            const baseDamage = 500;
+            
+            damageTypes.forEach(type => {
+                let effectCount = 0;
+                
+                // 运行100次测试，统计效果触发次数
+                for (let i = 0; i < 100; i++) {
+                    const result = calculateDamage({
+                        baseDamage: baseDamage,
+                        damageType: type
+                    });
+                    if (result.statusEffects.length > 0) {
+                        effectCount++;
+                    }
+                }
+                
+                resultsDiv.innerHTML += `
+                    <div class="test-result">
+                        <strong>${type} 伤害：</strong> 100次测试中触发效果 ${effectCount} 次（${effectCount}%）
+                    </div>
+                `;
+            });
+        }
+        
+        // 运行防御递减测试
+        function runDefenseDiminishingTest() {
+            const resultsDiv = document.getElementById('defense-test-results');
+            resultsDiv.innerHTML = '<h3>防御边际效益递减测试结果：</h3>';
+            
+            const defenseValues = [0, 100, 500, 1000, 2000, 5000, 10000];
+            
+            defenseValues.forEach(defense => {
+                const effectiveDefense = calculateDefenseDiminishing(defense);
+                const reductionRate = (effectiveDefense / defense) * 100;
+                
+                resultsDiv.innerHTML += `
+                    <div class="test-result">
+                        基础防御：${defense} → 实际防御：${effectiveDefense.toFixed(1)}（效果：${reductionRate.toFixed(1)}%）
+                    </div>
+                `;
+            });
+        }
+        
+        // 初始化测试
+        window.onload = function() {
+            console.log('战斗机制测试页面加载完成！');
+            console.log('可以点击按钮运行各项测试。');
+        };
+    </script>
+</body>
+</html>

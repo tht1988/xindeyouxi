@@ -1,0 +1,373 @@
+{
+  "consumables": [
+    /* 食物类 */
+    {
+      "id": "bread",
+      "name": "面包",
+      "type": "consumable",
+      "category": "food",
+      "effect": {
+        "type": "instant",
+        "health": 20,
+        "hunger": 30
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 15
+    },
+    {
+      "id": "cheese",
+      "name": "奶酪",
+      "type": "consumable",
+      "category": "food",
+      "effect": {
+        "type": "instant",
+        "health": 30,
+        "hunger": 40
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 15
+    },
+    {
+      "id": "apple",
+      "name": "苹果",
+      "type": "consumable",
+      "category": "food",
+      "effect": {
+        "type": "instant",
+        "health": 15,
+        "hunger": 15,
+        "mana": 10
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 20
+    },
+    {
+      "id": "cooked_meat",
+      "name": "烤肉",
+      "type": "consumable",
+      "category": "food",
+      "effect": {
+        "type": "instant",
+        "health": 50,
+        "hunger": 70,
+        "stamina": 20
+      },
+      "rarity": "common",
+      "level_requirement": 3,
+      "max_stack": 10
+    },
+    {
+      "id": "steak",
+      "name": "牛排",
+      "type": "consumable",
+      "category": "food",
+      "effect": {
+        "type": "instant",
+        "health": 80,
+        "hunger": 100,
+        "stamina": 40
+      },
+      "rarity": "uncommon",
+      "level_requirement": 5,
+      "max_stack": 10
+    },
+    
+    /* 饮用水类 */
+    {
+      "id": "water_bottle",
+      "name": "水瓶",
+      "type": "consumable",
+      "category": "drink",
+      "effect": {
+        "type": "instant",
+        "thirst": 50,
+        "mana": 15
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 15
+    },
+    {
+      "id": "wine",
+      "name": "葡萄酒",
+      "type": "consumable",
+      "category": "drink",
+      "effect": {
+        "type": "instant",
+        "health": 25,
+        "thirst": 30,
+        "mana": 30
+      },
+      "rarity": "common",
+      "level_requirement": 3,
+      "max_stack": 10
+    },
+    
+    /* 材料类 - 基础材料 */
+    {
+      "id": "iron_ore",
+      "name": "铁矿石",
+      "type": "consumable",
+      "category": "material",
+      "subcategory": "ore",
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 50
+    },
+    {
+      "id": "copper_ore",
+      "name": "铜矿石",
+      "type": "consumable",
+      "category": "material",
+      "subcategory": "ore",
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 50
+    },
+    {
+      "id": "wood",
+      "name": "木材",
+      "type": "consumable",
+      "category": "material",
+      "subcategory": "wood",
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 50
+    },
+    {
+      "id": "leather",
+      "name": "皮革",
+      "type": "consumable",
+      "category": "material",
+      "subcategory": "hide",
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 30
+    },
+    {
+      "id": "cloth",
+      "name": "布料",
+      "type": "consumable",
+      "category": "material",
+      "subcategory": "fabric",
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 30
+    },
+    
+    /* 材料类 - 魔法材料 */
+    {
+      "id": "mana_crystal",
+      "name": "魔法水晶",
+      "type": "consumable",
+      "category": "material",
+      "subcategory": "magic",
+      "rarity": "uncommon",
+      "level_requirement": 8,
+      "max_stack": 20
+    },
+    {
+      "id": "dragon_scale",
+      "name": "龙鳞",
+      "type": "consumable",
+      "category": "material",
+      "subcategory": "rare",
+      "rarity": "rare",
+      "level_requirement": 15,
+      "max_stack": 10
+    },
+    
+    /* 卷轴类 */
+    {
+      "id": "teleport_scroll",
+      "name": "传送卷轴",
+      "type": "consumable",
+      "category": "scroll",
+      "effect": {
+        "type": "instant",
+        "teleport": true
+      },
+      "rarity": "uncommon",
+      "level_requirement": 5,
+      "max_stack": 5
+    },
+    {
+      "id": "identify_scroll",
+      "name": "鉴定卷轴",
+      "type": "consumable",
+      "category": "scroll",
+      "effect": {
+        "type": "instant",
+        "identify": true
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 10
+    },
+    {
+      "id": "fireball_scroll",
+      "name": "火球术卷轴",
+      "type": "consumable",
+      "category": "scroll",
+      "effect": {
+        "type": "spell",
+        "spell": "fireball",
+        "damage": 80,
+        "range": 10
+      },
+      "rarity": "uncommon",
+      "level_requirement": 7,
+      "max_stack": 5
+    },
+    {
+      "id": "heal_scroll",
+      "name": "治疗术卷轴",
+      "type": "consumable",
+      "category": "scroll",
+      "effect": {
+        "type": "spell",
+        "spell": "heal",
+        "health": 150
+      },
+      "rarity": "uncommon",
+      "level_requirement": 6,
+      "max_stack": 5
+    },
+    
+    /* 炸弹类 */
+    {
+      "id": "small_bomb",
+      "name": "小型炸弹",
+      "type": "consumable",
+      "category": "explosive",
+      "effect": {
+        "type": "instant",
+        "damage": 50,
+        "range": 3,
+        "damage_type": "fire"
+      },
+      "rarity": "common",
+      "level_requirement": 2,
+      "max_stack": 10
+    },
+    {
+      "id": "large_bomb",
+      "name": "大型炸弹",
+      "type": "consumable",
+      "category": "explosive",
+      "effect": {
+        "type": "instant",
+        "damage": 100,
+        "range": 5,
+        "damage_type": "fire"
+      },
+      "rarity": "uncommon",
+      "level_requirement": 8,
+      "max_stack": 5
+    },
+    {
+      "id": "poison_bomb",
+      "name": "毒炸弹",
+      "type": "consumable",
+      "category": "explosive",
+      "effect": {
+        "type": "over_time",
+        "damage": 20,
+        "range": 4,
+        "damage_type": "poison",
+        "duration": 8,
+        "interval": 1
+      },
+      "rarity": "uncommon",
+      "level_requirement": 10,
+      "max_stack": 5
+    },
+    
+    /* 钥匙类 */
+    {
+      "id": "iron_key",
+      "name": "铁钥匙",
+      "type": "consumable",
+      "category": "key",
+      "effect": {
+        "type": "key",
+        "unlock": "iron_lock"
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 1
+    },
+    {
+      "id": "silver_key",
+      "name": "银钥匙",
+      "type": "consumable",
+      "category": "key",
+      "effect": {
+        "type": "key",
+        "unlock": "silver_lock"
+      },
+      "rarity": "uncommon",
+      "level_requirement": 5,
+      "max_stack": 1
+    },
+    {
+      "id": "gold_key",
+      "name": "金钥匙",
+      "type": "consumable",
+      "category": "key",
+      "effect": {
+        "type": "key",
+        "unlock": "gold_lock"
+      },
+      "rarity": "rare",
+      "level_requirement": 10,
+      "max_stack": 1
+    },
+    
+    /* 其他消耗品 */
+    {
+      "id": "torch",
+      "name": "火把",
+      "type": "consumable",
+      "category": "utility",
+      "effect": {
+        "type": "light",
+        "duration": 300
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 10
+    },
+    {
+      "id": "bandage",
+      "name": "绷带",
+      "type": "consumable",
+      "category": "medical",
+      "effect": {
+        "type": "over_time",
+        "health": 10,
+        "duration": 5,
+        "interval": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1,
+      "max_stack": 15
+    },
+    {
+      "id": "lockpick",
+      "name": "开锁器",
+      "type": "consumable",
+      "category": "utility",
+      "effect": {
+        "type": "lockpick",
+        "success_chance": 60
+      },
+      "rarity": "common",
+      "level_requirement": 3,
+      "max_stack": 10
+    }
+  ]
+}

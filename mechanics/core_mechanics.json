@@ -1,0 +1,107 @@
+{
+  "combat": {
+    "damage_calculation": {
+      "formula": "(attack * (1 + strength_bonus)) - (defense * 0.8)",
+      "min_damage": 1
+    },
+    "critical_hit": {
+      "multiplier": 1.5,
+      "base_chance": 5
+    },
+    "hit_chance": {
+      "base": 95,
+      "agility_modifier": 0.5
+    }
+  },
+  "item_generation": {
+    "base_item_chance": 70,
+    "affix_application": {
+      "prefix": true,
+      "suffix": true,
+      "unique_chance": 0.5
+    },
+    "level_scaling": {
+      "damage_multiplier": 1.1,
+      "armor_multiplier": 1.08,
+      "attribute_multiplier": 1.05
+    }
+  },
+  "experience": {
+    "curve": "exponential",
+    "base_required": 100,
+    "multiplier_per_level": 1.5,
+    "max_level": 99,
+    "experience_sources": {
+      "combat": {
+        "base": 1.0,
+        "level_difference_modifier": {
+          "higher": 1.5,
+          "same": 1.0,
+          "lower": 0.5
+        }
+      },
+      "quests": {
+        "base": 2.0,
+        "bonus_for_completion": 50
+      },
+      "crafting": {
+        "base": 0.5,
+        "scaling_factor": 0.1
+      },
+      "exploration": {
+        "base": 0.3,
+        "unique_areas_bonus": 100
+      }
+    },
+    "reward_multiplier": {
+      "same_level": 1.0,
+      "higher_level": 1.5,
+      "lower_level": 0.5
+    },
+    "level_rewards": {
+      "attribute_points_per_level": 3,
+      "skill_points_per_level": {
+        "1-20": 1,
+        "21-45": 2,
+        "46-80": 2,
+        "81-99": 3
+      },
+      "health_gain_per_level": 10,
+      "mana_gain_per_level": 5,
+      "stamina_gain_per_level": 3
+    },
+    "level_tiers": {
+      "1-20": {
+        "name": "新手阶段",
+        "description": "学习基础技能和游戏机制",
+        "max_skill_rank": 5
+      },
+      "21-45": {
+        "name": "成长阶段",
+        "description": "掌握进阶技能和战术",
+        "max_skill_rank": 10
+      },
+      "46-80": {
+        "name": "精通阶段",
+        "description": "成为领域专家，解锁高级技能",
+        "max_skill_rank": 15
+      },
+      "81-99": {
+        "name": "传奇阶段",
+        "description": "超越极限，获得终极力量",
+        "max_skill_rank": 20
+      }
+    }
+  },
+  "gameplay": {
+    "difficulty_levels": ["easy", "normal", "hard", "nightmare"],
+    "gold_drop": {
+      "base": 10,
+      "level_multiplier": 2
+    },
+    "inventory": {
+      "base_slots": 20,
+      "max_slots": 100
+    }
+  }
+}

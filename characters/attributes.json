@@ -1,0 +1,90 @@
+{
+  "attributes": {
+    "strength": {
+      "name": "力量",
+      "description": "增加物理伤害和负重能力",
+      "effects": {
+        "physical_damage": 1.0,
+        "carry_capacity": 5.0
+      }
+    },
+    "agility": {
+      "name": "敏捷",
+      "description": "增加攻击速度和暴击率",
+      "effects": {
+        "attack_speed": 0.01,
+        "critical_chance": 0.1
+      }
+    },
+    "intelligence": {
+      "name": "智力",
+      "description": "增加魔法伤害和法力值",
+      "effects": {
+        "magic_damage": 1.0,
+        "mana": 10.0
+      }
+    },
+    "vitality": {
+      "name": "活力",
+      "description": "增加生命值和生命恢复",
+      "effects": {
+        "health": 20.0,
+        "health_regen": 0.1
+      }
+    }
+  },
+  "level_up": {
+    "attribute_points_per_level": 3,
+    "skill_points_per_level": {
+      "1-20": 1,
+      "21-45": 2,
+      "46-80": 2,
+      "81-99": 3
+    },
+    "health_gain_per_level": 10,
+    "mana_gain_per_level": 5,
+    "stamina_gain_per_level": 3,
+    "growth_bonus": {
+      "strength": {
+        "base": 0.5,
+        "class_modifiers": {
+          "warrior": 1.5,
+          "assassin": 0.8,
+          "knight": 1.2
+        }
+      },
+      "agility": {
+        "base": 0.5,
+        "class_modifiers": {
+          "warrior": 0.7,
+          "assassin": 1.8,
+          "knight": 1.0
+        }
+      },
+      "precision": {
+        "base": 0.5,
+        "class_modifiers": {
+          "warrior": 0.8,
+          "assassin": 1.5,
+          "knight": 0.9
+        }
+      },
+      "vitality": {
+        "base": 0.5,
+        "class_modifiers": {
+          "warrior": 1.3,
+          "assassin": 0.7,
+          "knight": 1.6
+        }
+      },
+      "endurance": {
+        "base": 0.5,
+        "class_modifiers": {
+          "warrior": 1.2,
+          "assassin": 0.6,
+          "knight": 1.7
+        }
+      }
+    }
+  }
+}

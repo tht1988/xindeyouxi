@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伤害算法测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .test-result {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .test-passed {
+            color: green;
+        }
+        .test-failed {
+            color: red;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>伤害算法测试</h1>
+    
+    <div id="test-results"></div>
+    
+    <script>
+        // 测试用的 calculateDamage 函数
+        function calculateDamage(attack, defense, damageType = 'physical', targetResistances = {}) {
+            // 默认抗性为0
+            const defaultResistances = {
+                physical: 0,
+                fire: 0,
+                ice: 0,
+                lightning: 0
+            };
+            
+            // 合并默认抗性和目标抗性
+            const resistances = { ...defaultResistances, ...targetResistances };
+            
+            // 获取对应伤害类型的抗性
+            const resistance = resistances[damageType] || 0;
+            
+            // 计算抗性减免后的伤害
+            let resistanceReducedDamage = attack * (1 - resistance / 100);
+            
+            // 防御减免：物理伤害全额减免，属性伤害减半减免
+            let defenseReduction = damageType === 'physical' ? defense : defense * 0.5;
+            
+            // 最终伤害
+            const finalDamage = Math.max(1, resistanceReducedDamage - defenseReduction);
+            return finalDamage;
+        }
+        
+        // 测试函数
+        function runTests() {
+            const results = [];
+            
+            // 测试示例1：物理伤害
+            const test1 = {
+                damage: 1000,
+                defense: 400,
+                damageType: 'physical',
+                resistances: { physical: 50 }
+            };
+            const result1 = calculateDamage(test1.damage, test1.defense, test1.damageType, test1.resistances);
+            results.push({
+                name: '测试示例1 - 物理伤害',
+                input: test1,
+                expected: 100,
+                actual: result1,
+                passed: result1 === 100
+            });
+            
+            // 测试示例2：冰伤+火伤
+            const iceDamage = 500;
+            const fireDamage = 400;
+            const test2_defense = 400;
+            const test2_resistances = {
+                physical: 75,
+                ice: 50,
+                fire: 40
+            };
+            
+            // 计算冰伤部分
+            const iceResult = calculateDamage(iceDamage, test2_defense, 'ice', test2_resistances);
+            // 计算火伤部分
+            const fireResult = calculateDamage(fireDamage, test2_defense, 'fire', test2_resistances);
+            // 总伤害
+            const totalResult = iceResult + fireResult;
+            
+            results.push({
+                name: '测试示例2 - 冰伤+火伤',
+                input: {
+                    iceDamage: iceDamage,
+                    fireDamage: fireDamage,
+                    defense: test2_defense,
+                    resistances: test2_resistances
+                },
+                expected: 210,
+                actual: totalResult,
+                passed: totalResult === 210,
+                details: {
+                    iceResult: iceResult,
+                    fireResult: fireResult
+                }
+            });
+            
+            // 测试示例3：高物理伤害
+            const test3 = {
+                damage: 2000,
+                defense: 500,
+                damageType: 'physical',
+                resistances: { physical: 30 }
+            };
+            const result3 = calculateDamage(test3.damage, test3.defense, test3.damageType, test3.resistances);
+            results.push({
+                name: '测试示例3 - 高物理伤害',
+                input: test3,
+                expected: 900,
+                actual: result3,
+                passed: result3 === 900
+            });
+            
+            // 测试示例4：火伤
+            const test4 = {
+                damage: 1500,
+                defense: 300,
+                damageType: 'fire',
+                resistances: { fire: 25 }
+            };
+            const result4 = calculateDamage(test4.damage, test4.defense, test4.damageType, test4.resistances);
+            results.push({
+                name: '测试示例4 - 火伤',
+                input: test4,
+                expected: 975,
+                actual: result4,
+                passed: result4 === 975
+            });
+            
+            // 显示测试结果
+            displayResults(results);
+        }
+        
+        // 显示测试结果
+        function displayResults(results) {
+            const container = document.getElementById('test-results');
+            let html = '';
+            
+            results.forEach((test, index) => {
+                html += `
+                    <div class="test-result">
+                        <h3>${index + 1}. ${test.name}</h3>
+                        <p><strong>输入参数:</strong></p>
+                        <pre>${JSON.stringify(test.input, null, 2)}</pre>
+                        <p><strong>预期结果:</strong> ${test.expected}</p>
+                        <p><strong>实际结果:</strong> ${test.actual}</p>
+                        ${test.details ? `<p><strong>详细结果:</strong> ${JSON.stringify(test.details, null, 2)}</p>` : ''}
+                        <p class="${test.passed ? 'test-passed' : 'test-failed'}">
+                            <strong>测试${test.passed ? '通过' : '失败'}</strong>
+                        </p>
+                    </div>
+                `;
+            });
+            
+            // 统计结果
+            const passedCount = results.filter(test => test.passed).length;
+            const totalCount = results.length;
+            
+            html += `
+                <div class="test-result">
+                    <h3>测试总结</h3>
+                    <p>通过: ${passedCount}/${totalCount}</p>
+                    <p class="${passedCount === totalCount ? 'test-passed' : 'test-failed'}">
+                        <strong>${passedCount === totalCount ? '所有测试通过！' : '部分测试失败！'}</strong>
+                    </p>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        // 运行测试
+        runTests();
+    </script>
+</body>
+</html>

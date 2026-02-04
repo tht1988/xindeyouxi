@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG游戏流程测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #ffd700;
+            text-align: center;
+        }
+        h2 {
+            color: #4caf50;
+            margin-top: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #3d3d3d;
+            border-radius: 4px;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #4caf50;
+            background-color: #4d4d4d;
+        }
+        .test-button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .test-button:hover {
+            background-color: #45a049;
+        }
+        .status-text {
+            margin: 10px 0;
+            color: #ffd700;
+        }
+        .log-container {
+            background-color: #1a1a1a;
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+        .log-entry {
+            margin: 5px 0;
+            color: #ccc;
+        }
+        .success {
+            color: #4caf50;
+        }
+        .error {
+            color: #f44336;
+        }
+        .warning {
+            color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>RPG游戏流程测试</h1>
+        
+        <div class="test-section">
+            <h2>游戏状态</h2>
+            <div class="status-text">当前玩家等级: <span id="player-level">1</span></div>
+            <div class="status-text">当前关卡: <span id="current-level">null</span></div>
+            <div class="status-text">新手引导完成: <span id="tutorial-completed">false</span></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>1. 新手引导测试</h2>
+            <button class="test-button" onclick="testGuideNodes()">测试新手引导节点</button>
+            <button class="test-button" onclick="testGuideProgress()">测试引导进度更新</button>
+            <button class="test-button" onclick="showGuideMessage()">显示引导消息</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>2. 关卡设计测试</h2>
+            <button class="test-button" onclick="testLevelLoading()">测试关卡加载</button>
+            <button class="test-button" onclick="testAvailableLevels()">测试可用关卡</button>
+            <button class="test-button" onclick="testCurrentLevel()">测试当前关卡</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>3. 胜利/失败条件测试</h2>
+            <button class="test-button" onclick="testVictoryConditions()">测试胜利条件</button>
+            <button class="test-button" onclick="testDefeatConditions()">测试失败条件</button>
+            <button class="test-button" onclick="testCompleteLevel()">测试完成关卡</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>测试日志</h2>
+            <div class="log-container" id="test-log"></div>
+        </div>
+    </div>
+    
+    <script src="game_logic.js"></script>
+    <script>
+        // 测试日志功能
+        function log(message, type = 'info') {
+            const logContainer = document.getElementById('test-log');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        // 更新游戏状态显示
+        function updateGameStatus() {
+            document.getElementById('player-level').textContent = player.level;
+            document.getElementById('current-level').textContent = player.level_progress ? player.level_progress.current_level : 'null';
+            document.getElementById('tutorial-completed').textContent = player.guide_progress.tutorial_completed;
+        }
+        
+        // 1. 新手引导测试
+        function testGuideNodes() {
+            log('开始测试新手引导节点...');
+            
+            if (newbieGuideConfig && newbieGuideConfig.progress_nodes) {
+                log(`共找到 ${newbieGuideConfig.progress_nodes.length} 个引导节点`, 'success');
+                newbieGuideConfig.progress_nodes.forEach((node, index) => {
+                    log(`节点 ${index + 1}: ${node.name} (${node.id}) - ${node.description}`, 'info');
+                });
+            } else {
+                log('未找到新手引导配置', 'error');
+            }
+        }
+        
+        function testGuideProgress() {
+            log('开始测试引导进度更新...');
+            
+            // 模拟更新引导标记
+            const testFlag = 'movement_used';
+            updateMovementUsedFlag();
+            log(`更新引导标记: ${testFlag} = ${player.guide_progress.flags[testFlag]}`, 'success');
+            
+            // 测试技能使用标记
+            const testFlag2 = 'skill_used';
+            updateSkillUsedFlag();
+            log(`更新引导标记: ${testFlag2} = ${player.guide_progress.flags[testFlag2]}`, 'success');
+            
+            updateGameStatus();
+        }
+        
+        function showGuideMessage() {
+            log('显示引导消息...');
+            showGuideMessage('测试引导', '这是一个测试引导消息', true, 'test-container');
+        }
+        
+        // 2. 关卡设计测试
+        function testLevelLoading() {
+            log('开始测试关卡加载...');
+            
+            if (levelsConfig && levelsConfig.levels) {
+                log(`共加载 ${levelsConfig.levels.length} 个关卡`, 'success');
+                levelsConfig.levels.forEach((level, index) => {
+                    log(`关卡 ${index + 1}: ${level.name} (${level.id}) - 需求等级: ${level.required_level}`, 'info');
+                    log(`  敌人: ${level.enemies.length} 种敌人`, 'info');
+                    log(`  Boss: ${level.boss ? level.boss.id : '无'}`, 'info');
+                    log(`  目标: ${level.objectives.length} 个目标`, 'info');
+                });
+            } else {
+                log('未找到关卡配置', 'error');
+            }
+        }
+        
+        function testAvailableLevels() {
+            log('开始测试可用关卡...');
+            
+            const availableLevels = getAvailableLevels();
+            if (availableLevels.length > 0) {
+                log(`当前等级可挑战 ${availableLevels.length} 个关卡`, 'success');
+                availableLevels.forEach(level => {
+                    log(`可用关卡: ${level.name} (需求等级: ${level.required_level})`, 'info');
+                });
+            } else {
+                log('没有可用关卡', 'warning');
+            }
+        }
+        
+        function testCurrentLevel() {
+            log('开始测试当前关卡...');
+            
+            const currentLevel = getCurrentLevel();
+            if (currentLevel) {
+                log(`当前推荐关卡: ${currentLevel.name} (${currentLevel.id})`, 'success');
+                document.getElementById('current-level').textContent = currentLevel.id;
+            } else {
+                log('未找到当前关卡', 'warning');
+            }
+        }
+        
+        // 3. 胜利/失败条件测试
+        function testVictoryConditions() {
+            log('开始测试胜利条件...');
+            
+            // 测试关卡1胜利条件
+            const level1Victory = checkLevelVictory('level_1');
+            log(`关卡1胜利条件: ${level1Victory}`, level1Victory ? 'success' : 'warning');
+            
+            // 测试关卡2胜利条件
+            const level2Victory = checkLevelVictory('level_2');
+            log(`关卡2胜利条件: ${level2Victory}`, level2Victory ? 'success' : 'warning');
+            
+            // 测试关卡3胜利条件
+            const level3Victory = checkLevelVictory('level_3');
+            log(`关卡3胜利条件: ${level3Victory}`, level3Victory ? 'success' : 'warning');
+        }
+        
+        function testDefeatConditions() {
+            log('开始测试失败条件...');
+            
+            // 保存当前玩家状态
+            const originalHealth = player.health;
+            
+            // 测试玩家死亡条件
+            player.health = 0;
+            const playerDeathDefeat = checkLevelDefeat('level_1');
+            log(`玩家死亡失败条件: ${playerDeathDefeat}`, playerDeathDefeat ? 'success' : 'warning');
+            
+            // 恢复玩家状态
+            player.health = originalHealth;
+            
+            // 测试时间限制条件（模拟）
+            const timeLimitDefeat = checkLevelDefeat('level_2');
+            log(`时间限制失败条件: ${timeLimitDefeat}`, timeLimitDefeat ? 'success' : 'warning');
+        }
+        
+        function testCompleteLevel() {
+            log('开始测试完成关卡...');
+            
+            // 完成关卡1
+            completeLevel('level_1');
+            log('已完成关卡1', 'success');
+            
+            updateGameStatus();
+        }
+        
+        // 初始化测试
+        window.onload = function() {
+            log('游戏流程测试页面加载完成', 'success');
+            log('初始化游戏配置...');
+            
+            // 初始化游戏配置
+            loadGameConfigs();
+            
+            // 初始化玩家进度
+            if (!player.level_progress) {
+                player.level_progress = {
+                    completed_levels: [],
+                    current_level: null
+                };
+            }
+            
+            updateGameStatus();
+            log('测试环境初始化完成', 'success');
+        };
+    </script>
+</body>
+</html>

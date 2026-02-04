@@ -1,0 +1,160 @@
+{
+  "guide_enabled": true,
+  "progress_nodes": [
+    {
+      "id": "node_1",
+      "name": "角色创建",
+      "description": "选择你的职业，开始冒险",
+      "completion_condition": "class_selected",
+      "rewards": ["新手装备", "100金币", "50经验"],
+      "next_node": "node_2"
+    },
+    {
+      "id": "node_2",
+      "name": "基础操作",
+      "description": "学习如何移动和使用技能",
+      "completion_condition": "movement_used && skill_used",
+      "rewards": ["技能书", "50金币", "25经验"],
+      "next_node": "node_3"
+    },
+    {
+      "id": "node_3",
+      "name": "第一次战斗",
+      "description": "与第一个敌人战斗并获胜",
+      "completion_condition": "first_enemy_defeated",
+      "rewards": ["武器", "100金币", "100经验"],
+      "next_node": "node_4"
+    },
+    {
+      "id": "node_4",
+      "name": "装备管理",
+      "description": "学习如何装备物品和管理背包",
+      "completion_condition": "item_equipped",
+      "rewards": ["护甲", "50金币", "50经验"],
+      "next_node": "node_5"
+    },
+    {
+      "id": "node_5",
+      "name": "属性加点",
+      "description": "学习如何分配属性点",
+      "completion_condition": "attribute_point_used",
+      "rewards": ["属性药水", "50金币", "50经验"],
+      "next_node": "node_6"
+    },
+    {
+      "id": "node_6",
+      "name": "技能升级",
+      "description": "学习如何升级技能",
+      "completion_condition": "skill_upgraded",
+      "rewards": ["技能点", "100金币", "100经验"],
+      "next_node": "node_7"
+    },
+    {
+      "id": "node_7",
+      "name": "探索地图",
+      "description": "探索游戏世界，发现新区域",
+      "completion_condition": "map_explored",
+      "rewards": ["地图", "150金币", "150经验"],
+      "next_node": "node_8"
+    },
+    {
+      "id": "node_8",
+      "name": "精英挑战",
+      "description": "挑战第一个精英敌人",
+      "completion_condition": "elite_enemy_defeated",
+      "rewards": ["稀有装备", "200金币", "200经验"],
+      "next_node": "node_9"
+    },
+    {
+      "id": "node_9",
+      "name": "装备强化",
+      "description": "学习如何强化装备",
+      "completion_condition": "equipment_enhanced",
+      "rewards": ["强化石", "100金币", "100经验"],
+      "next_node": "node_10"
+    },
+    {
+      "id": "node_10",
+      "name": "最终挑战",
+      "description": "挑战第一个Boss",
+      "completion_condition": "boss_defeated",
+      "rewards": ["史诗装备", "500金币", "500经验"],
+      "next_node": "null"
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "id": "tutorial_1",
+      "node_id": "node_1",
+      "title": "欢迎来到RPG世界",
+      "content": "选择一个职业开始你的冒险。每个职业都有独特的优势和玩法。",
+      "target_element": "class_selection",
+      "highlight": true,
+      "auto_advance": false
+    },
+    {
+      "id": "tutorial_2",
+      "node_id": "node_2",
+      "title": "移动和探索",
+      "content": "使用WASD或方向键移动角色，使用E键与物品交互。",
+      "target_element": "game_map",
+      "highlight": false,
+      "auto_advance": false
+    },
+    {
+      "id": "tutorial_3",
+      "node_id": "node_2",
+      "title": "使用技能",
+      "content": "点击技能按钮或使用快捷键释放技能。技能需要消耗魔法值或体力。",
+      "target_element": "skill_buttons",
+      "highlight": true,
+      "auto_advance": false
+    },
+    {
+      "id": "tutorial_4",
+      "node_id": "node_3",
+      "title": "战斗技巧",
+      "content": "攻击敌人时，注意你的生命值和敌人的状态。合理使用技能可以获得战斗优势。",
+      "target_element": "combat_arena",
+      "highlight": false,
+      "auto_advance": false
+    },
+    {
+      "id": "tutorial_5",
+      "node_id": "node_4",
+      "title": "装备管理",
+      "content": "点击背包中的物品可以装备或使用它们。装备可以提升你的属性和战斗力。",
+      "target_element": "inventory_panel",
+      "highlight": true,
+      "auto_advance": false
+    },
+    {
+      "id": "tutorial_6",
+      "node_id": "node_5",
+      "title": "属性加点",
+      "content": "升级后获得属性点，合理分配属性点可以提升你的战斗能力。",
+      "target_element": "attribute_panel",
+      "highlight": true,
+      "auto_advance": false
+    },
+    {
+      "id": "tutorial_7",
+      "node_id": "node_6",
+      "title": "技能升级",
+      "content": "使用技能点升级你的技能，提升技能的伤害和效果。",
+      "target_element": "skill_tree",
+      "highlight": true,
+      "auto_advance": false
+    }
+  ],
+  "victory_conditions": {
+    "battle": "enemy_health <= 0",
+    "quest": "objectives_completed",
+    "boss_fight": "boss_health <= 0 && time_remaining > 0"
+  },
+  "defeat_conditions": {
+    "battle": "player_health <= 0",
+    "quest": "time_remaining <= 0",
+    "boss_fight": "player_health <= 0 || time_remaining <= 0"
+  }
+}

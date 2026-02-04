@@ -1,0 +1,174 @@
+{
+  "accessories": [
+    /* 戒指类 */
+    {
+      "id": "iron_ring",
+      "name": "铁戒指",
+      "type": "finger",
+      "category": "ring",
+      "max_equipped": 2,
+      "base_stats": {
+        "strength": 1,
+        "agility": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "copper_ring",
+      "name": "铜戒指",
+      "type": "finger",
+      "category": "ring",
+      "max_equipped": 2,
+      "base_stats": {
+        "intelligence": 1,
+        "wisdom": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "silver_ring",
+      "name": "银戒指",
+      "type": "finger",
+      "category": "ring",
+      "max_equipped": 2,
+      "base_stats": {
+        "health": 5,
+        "mana": 5
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 项链类 */
+    {
+      "id": "leather_amulet",
+      "name": "皮革项链",
+      "type": "neck",
+      "category": "amulet",
+      "max_equipped": 1,
+      "base_stats": {
+        "strength": 2,
+        "health": 10
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "stone_amulet",
+      "name": "石质项链",
+      "type": "neck",
+      "category": "amulet",
+      "max_equipped": 1,
+      "base_stats": {
+        "intelligence": 2,
+        "mana": 10
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 腰带类 */
+    {
+      "id": "cloth_belt",
+      "name": "布腰带",
+      "type": "waist",
+      "category": "belt",
+      "max_equipped": 1,
+      "base_stats": {
+        "agility": 2,
+        "health": 5
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "leather_belt",
+      "name": "皮腰带",
+      "type": "waist",
+      "category": "belt",
+      "max_equipped": 1,
+      "base_stats": {
+        "strength": 2,
+        "stamina": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 耳环类 */
+    {
+      "id": "wooden_earrings",
+      "name": "木质耳环",
+      "type": "ear",
+      "category": "earring",
+      "max_equipped": 2,
+      "base_stats": {
+        "agility": 1,
+        "dexterity": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "bone_earrings",
+      "name": "骨质耳环",
+      "type": "ear",
+      "category": "earring",
+      "max_equipped": 2,
+      "base_stats": {
+        "strength": 1,
+        "constitution": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 护符类 */
+    {
+      "id": "basic_talisman",
+      "name": "基础护符",
+      "type": "neck",
+      "category": "talisman",
+      "max_equipped": 1,
+      "base_stats": {
+        "wisdom": 2,
+        "magic_resistance": 2
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 徽章类 */
+    {
+      "id": "bronze_badge",
+      "name": "铜质徽章",
+      "type": "chest",
+      "category": "badge",
+      "max_equipped": 1,
+      "base_stats": {
+        "strength": 1,
+        "intelligence": 1,
+        "agility": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 披风类 */
+    {
+      "id": "cloth_cloak",
+      "name": "布披风",
+      "type": "back",
+      "category": "cloak",
+      "max_equipped": 1,
+      "base_stats": {
+        "agility": 2,
+        "magic_resistance": 1
+      },
+      "rarity": "common",
+      "level_requirement": 1
+    }
+  ]
+}

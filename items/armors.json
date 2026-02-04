@@ -1,0 +1,251 @@
+{
+  "armors": [
+    /* 布甲类 */
+    {
+      "id": "cloth_hood",
+      "name": "布帽",
+      "type": "head",
+      "material": "cloth",
+      "base_armor": 3,
+      "defense_types": ["physical"],
+      "magic_resistance": 7,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "cloth_robe",
+      "name": "布袍",
+      "type": "chest",
+      "material": "cloth",
+      "base_armor": 5,
+      "defense_types": ["physical"],
+      "magic_resistance": 12,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "cloth_gloves",
+      "name": "布手套",
+      "type": "hands",
+      "material": "cloth",
+      "base_armor": 2,
+      "defense_types": ["physical"],
+      "magic_resistance": 5,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "cloth_pants",
+      "name": "布裤",
+      "type": "legs",
+      "material": "cloth",
+      "base_armor": 4,
+      "defense_types": ["physical"],
+      "magic_resistance": 9,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "cloth_boots",
+      "name": "布靴",
+      "type": "feet",
+      "material": "cloth",
+      "base_armor": 2,
+      "defense_types": ["physical"],
+      "magic_resistance": 6,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 皮甲类 */
+    {
+      "id": "leather_cap",
+      "name": "皮帽",
+      "type": "head",
+      "material": "leather",
+      "base_armor": 5,
+      "defense_types": ["physical"],
+      "magic_resistance": 3,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "leather_jerkin",
+      "name": "皮甲",
+      "type": "chest",
+      "material": "leather",
+      "base_armor": 10,
+      "defense_types": ["physical"],
+      "magic_resistance": 5,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "leather_gloves",
+      "name": "皮手套",
+      "type": "hands",
+      "material": "leather",
+      "base_armor": 3,
+      "defense_types": ["physical"],
+      "magic_resistance": 2,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "leather_pants",
+      "name": "皮裤",
+      "type": "legs",
+      "material": "leather",
+      "base_armor": 7,
+      "defense_types": ["physical"],
+      "magic_resistance": 4,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "leather_boots",
+      "name": "皮靴",
+      "type": "feet",
+      "material": "leather",
+      "base_armor": 4,
+      "defense_types": ["physical"],
+      "magic_resistance": 3,
+      "agility_penalty": 0,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 链甲类 */
+    {
+      "id": "chain_helmet",
+      "name": "链甲头盔",
+      "type": "head",
+      "material": "chain",
+      "base_armor": 7,
+      "defense_types": ["physical"],
+      "magic_resistance": 2,
+      "agility_penalty": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "chain_mail",
+      "name": "链甲",
+      "type": "chest",
+      "material": "chain",
+      "base_armor": 14,
+      "defense_types": ["physical"],
+      "magic_resistance": 3,
+      "agility_penalty": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "chain_gloves",
+      "name": "链甲手套",
+      "type": "hands",
+      "material": "chain",
+      "base_armor": 5,
+      "defense_types": ["physical"],
+      "magic_resistance": 1,
+      "agility_penalty": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "chain_legs",
+      "name": "链甲护腿",
+      "type": "legs",
+      "material": "chain",
+      "base_armor": 9,
+      "defense_types": ["physical"],
+      "magic_resistance": 2,
+      "agility_penalty": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "chain_boots",
+      "name": "链甲靴",
+      "type": "feet",
+      "material": "chain",
+      "base_armor": 6,
+      "defense_types": ["physical"],
+      "magic_resistance": 2,
+      "agility_penalty": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    
+    /* 板甲类 */
+    {
+      "id": "plate_helmet",
+      "name": "板甲头盔",
+      "type": "head",
+      "material": "plate",
+      "base_armor": 10,
+      "defense_types": ["physical", "blunt"],
+      "magic_resistance": 0,
+      "agility_penalty": 2,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "plate_chest",
+      "name": "板甲胸甲",
+      "type": "chest",
+      "material": "plate",
+      "base_armor": 18,
+      "defense_types": ["physical", "blunt"],
+      "magic_resistance": 1,
+      "agility_penalty": 1.5,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "plate_gloves",
+      "name": "板甲手套",
+      "type": "hands",
+      "material": "plate",
+      "base_armor": 7,
+      "defense_types": ["physical", "blunt"],
+      "magic_resistance": 0,
+      "agility_penalty": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "plate_legs",
+      "name": "板甲护腿",
+      "type": "legs",
+      "material": "plate",
+      "base_armor": 12,
+      "defense_types": ["physical", "blunt"],
+      "magic_resistance": 0,
+      "agility_penalty": 2,
+      "rarity": "common",
+      "level_requirement": 1
+    },
+    {
+      "id": "plate_boots",
+      "name": "板甲靴",
+      "type": "feet",
+      "material": "plate",
+      "base_armor": 8,
+      "defense_types": ["physical", "blunt"],
+      "magic_resistance": 0,
+      "agility_penalty": 1,
+      "rarity": "common",
+      "level_requirement": 1
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "classes": [
+    {
+      "id": "warrior",
+      "name": "战士",
+      "description": "攻高血厚，均衡的近战职业",
+      "base_attributes": {
+        "strength": 19,
+        "agility": 11,
+        "precision": 11,
+        "vitality": 16,
+        "endurance": 15,
+        "dodge": 8
+      },
+      "growth_rates": {
+        "strength": 2.1,
+        "agility": 1.1,
+        "precision": 1.1,
+        "vitality": 1.7,
+        "endurance": 1.5,
+        "dodge": 0.8
+      },
+      "primary_attribute": "strength",
+      "specialization": "melee_combat",
+      "starting_skills": ["bash", "defend"],
+      "equipment_preferences": ["sword", "axe", "heavy_armor"]
+    },
+    {
+      "id": "assassin",
+      "name": "刺客",
+      "description": "高攻高暴击，高闪避，灵活的近战职业",
+      "base_attributes": {
+        "strength": 13,
+        "agility": 21,
+        "precision": 17,
+        "vitality": 12,
+        "endurance": 11,
+        "dodge": 22,
+        "critical_chance": 12
+      },
+      "growth_rates": {
+        "strength": 1.3,
+        "agility": 2.2,
+        "precision": 1.9,
+        "vitality": 1.2,
+        "endurance": 1.1,
+        "dodge": 1.7,
+        "critical_chance": 1.3
+      },
+      "primary_attribute": "agility",
+      "specialization": "stealth_combat",
+      "starting_skills": ["backstab", "stealth"],
+      "equipment_preferences": ["dagger", "light_armor", "cloak"]
+    },
+    {
+      "id": "knight",
+      "name": "骑士",
+      "description": "高血高防，移速越快攻击越高",
+      "base_attributes": {
+        "strength": 17,
+        "agility": 13,
+        "precision": 12,
+        "vitality": 17,
+        "endurance": 19,
+        "movement_speed": 100,
+        "armor": 18,
+        "dodge": 5
+      },
+      "growth_rates": {
+        "strength": 1.8,
+        "agility": 1.3,
+        "precision": 1.2,
+        "vitality": 1.8,
+        "endurance": 1.9,
+        "movement_speed": 2,
+        "armor": 1.4,
+        "dodge": 0.6
+      },
+      "primary_attribute": "endurance",
+      "specialization": "holy_combat",
+      "starting_skills": ["shield_bash", "holy_aura"],
+      "equipment_preferences": ["sword", "shield", "heavy_armor"],
+      "unique_passive": "speed_boost_attack"  
+    }
+  ]
+}

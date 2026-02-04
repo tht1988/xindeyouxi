@@ -1,0 +1,688 @@
+{
+  "prefixes": [
+    // 物理伤害类 - t1最高
+    {
+      "id": "annihilating",
+      "name": "歼灭的",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 100,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "devastating",
+      "name": "毁灭的",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 80,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "sundering",
+      "name": "碎裂的",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 60,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "crushing",
+      "name": "粉碎的",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 45,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "piercing",
+      "name": "穿刺的",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 30,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "sharp",
+      "name": "锋利的",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 22,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "keen",
+      "name": "锐利的",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 15,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "edged",
+      "name": "开刃的",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 10,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "bladed",
+      "name": "带刃的",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "damage",
+          "value": 5,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 攻击速度类
+    {
+      "id": "lightning",
+      "name": "闪电的",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.8,
+          "type": "flat"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "swift",
+      "name": "迅捷的",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.6,
+          "type": "flat"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "quick",
+      "name": "快速的",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.45,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "agile",
+      "name": "灵活的",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.35,
+          "type": "flat"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "speedy",
+      "name": "急速的",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.25,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "fast",
+      "name": "快速的",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.18,
+          "type": "flat"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "hasty",
+      "name": "仓促的",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.12,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "quickened",
+      "name": "加速的",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.08,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "rapid",
+      "name": "迅速的",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "attack_speed",
+          "value": 0.05,
+          "type": "flat"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 暴击类
+    {
+      "id": "critical",
+      "name": "致命的",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 30,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 150,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "deadly",
+      "name": "致死的",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 25,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 120,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "lethal",
+      "name": "致命的",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 20,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 100,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "critical_striking",
+      "name": "暴击的",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 15,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 80,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "precision",
+      "name": "精准的",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 12,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 60,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "accurate",
+      "name": "准确的",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 10,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 50,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "sharp_shooting",
+      "name": "锐射的",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 8,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 40,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "focused",
+      "name": "专注的",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 6,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 30,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "aimed",
+      "name": "瞄准的",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "critical_chance",
+          "value": 4,
+          "type": "percentage"
+        },
+        {
+          "stat": "critical_damage",
+          "value": 20,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 穿透类
+    {
+      "id": "armor_shredding",
+      "name": "破甲的",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 50,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "piercing",
+      "name": "穿透的",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 40,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "penetrating",
+      "name": "贯穿的",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 30,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "shredding",
+      "name": "撕裂的",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 25,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "armor_piercing",
+      "name": "穿甲的",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 20,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "puncturing",
+      "name": "穿刺的",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 15,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "stabbing",
+      "name": "戳刺的",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 12,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "pointed",
+      "name": "尖锐的",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 10,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "spiked",
+      "name": "带刺的",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "armor_penetration",
+          "value": 8,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    
+    // 技能伤害类
+    {
+      "id": "spellbinding",
+      "name": "魔咒的",
+      "level": "t1",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 60,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "legendary"
+    },
+    {
+      "id": "mystical",
+      "name": "神秘的",
+      "level": "t2",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 50,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "epic"
+    },
+    {
+      "id": "arcane",
+      "name": "奥术的",
+      "level": "t3",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 40,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "magical",
+      "name": "魔法的",
+      "level": "t4",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 35,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "rare"
+    },
+    {
+      "id": "enchanted",
+      "name": "附魔的",
+      "level": "t5",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 30,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "spell_weaving",
+      "name": "织法的",
+      "level": "t6",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 25,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "magicked",
+      "name": "魔法的",
+      "level": "t7",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 20,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "charmed",
+      "name": "魅惑的",
+      "level": "t8",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 15,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "cursed",
+      "name": "诅咒的",
+      "level": "t9",
+      "applicable_types": ["weapon"],
+      "effects": [
+        {
+          "stat": "skill_damage",
+          "value": 10,
+          "type": "percentage"
+        }
+      ],
+      "rarity": "common"
+    }
+  ]
+}
