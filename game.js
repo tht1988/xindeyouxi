@@ -117,7 +117,10 @@ class RPGGame {
 
   async loadJSON(path) {
     const response = await fetch(path);
-    return await response.json();
+    let text = await response.text();
+    // 移除JSON中的注释
+    text = text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+    return JSON.parse(text);
   }
 
   generateLoot(enemy) {
