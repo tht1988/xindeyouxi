@@ -118,8 +118,22 @@ class RPGGame {
   async loadJSON(path) {
     const response = await fetch(path);
     let text = await response.text();
+    
     // 移除JSON中的注释
-    text = text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+    // 1. 移除多行注释 /* ... */
+    text = text.replace(/\/\*[\s\S]*?\*\//g, '');
+    // 2. 移除单行注释 // ...
+    text = text.replace(/\/\/.*$/gm, '');
+    // 3. 移除多余的空白行
+    text = text.replace(/^\s*$/gm, '');
+    // 4. 合并连续的空白字符为单个空格
+    text = text.replace(/\s+/g, ' ');
+    // 5. 移除冒号、逗号前后的空格（确保标准JSON格式）
+    text = text.replace(/\s*:\s*/g, ':').replace(/\s*,\s*/g, ',');
+    // 6. 移除括号前后的空格
+    text = text.replace(/\s*\{\s*/g, '{').replace(/\s*\}\s*/g, '}');
+    text = text.replace(/\s*\[\s*/g, '[').replace(/\s*\]\s*/g, ']');
+    
     return JSON.parse(text);
   }
 
